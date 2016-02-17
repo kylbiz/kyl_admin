@@ -6,7 +6,7 @@
 ### 技术细节
 #### 本系统所使用的环境
 ```shell
-node 			v.4.1.0
+node 		v.4.1.0
 meteor 		v1.2.0.2
 mongodb 	v3.0.6
 ```
