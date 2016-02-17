@@ -1,0 +1,16 @@
+<template name="manager">
+    {{#content managerTitle="后台用户管理" managerType="user" title="后台用户管理"}}
+    <div class="row">
+        <div class="col-md-12">       
+            {{#boxTemplate title="管理员用户管理"}}
+            {{> managerList }}
+            {{/boxTemplate}}
+        </div>
+    </div>    
+    {{/content}}
+</template>
+
+<template name="managerList">
+    {{> ReactiveDatatable tableData=managerListData options=optionsObject }}
+    <button class="btn btn-primary addadmin">添加用户</button> 
+</template>

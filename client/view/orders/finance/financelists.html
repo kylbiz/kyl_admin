@@ -1,0 +1,29 @@
+<template name="financeList">    
+    {{#content title="公司财务订单" mainTitle="订单管理" productType="finance" listNum=listNum}}
+    <div class="row">
+        <div class="col-md-12">       
+        {{#source_boxTemplate title="公司财务订单"}}
+            {{> financelist_partial}}
+        {{/source_boxTemplate}}
+        </div>
+    </div>    
+    {{/content}}
+</template>
+
+
+<template name="financelist_partial">
+    {{> ReactiveDatatable tableData=orderlistData options=optionsObject }}
+    <div>
+    {{> datetime }}
+    </div>
+</template> 
+
+<template name="financeView">
+  {{#content title="财务代理" mainTitle="订单管理"}}
+  <div class="row">
+    <div class="col-md-12">
+      {{#boxTemplate title="财务代理"}} {{> detailTpl_partial }} {{/boxTemplate}}
+    </div>
+  </div>
+  {{/content}}
+</template>

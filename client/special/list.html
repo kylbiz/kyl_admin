@@ -1,0 +1,29 @@
+<template name="specialList">    
+  {{#content title="特别订单" mainTitle="订单管理" productType="registration"}}
+  <div class="row">
+    <div class="col-md-12">       
+      {{#boxTemplate title="特别订单"}}
+      {{> specialListsView }}
+      {{/boxTemplate}}
+    </div>
+  </div>    
+  {{/content}}
+  
+  {{> processTpl}}
+</template>
+
+
+<template name="specialListsView">
+    {{> ReactiveDatatable tableData=speciallistData options=optionsObject }}
+</template>
+
+
+<template name="specialView">
+  {{#content title="特别产品" mainTitle="订单管理" productType="bank"}}
+  <div class="row">
+    <div class="col-md-12">
+      {{#boxTemplate title="特别产品"}} {{> detailTpl_partial }} {{/boxTemplate}}
+    </div>
+  </div>
+  {{/content}}
+</template>

@@ -1,0 +1,85 @@
+<template name="boxTemplate">
+    <div class="box border primary">
+        <div class="box-title">
+            <h4>{{title}}</h4>
+        </div>
+        <div class="box-body">
+            {{> UI.contentBlock }}
+        </div>
+    </div>    
+</template>
+
+<template name="source_boxTemplate">      
+    <div class="box border primary">
+        <div class="box-title">
+            <h4>{{title}}</h4>
+        </div>
+        <div class="box-body">
+            <div class="header-tabs tabbable">
+            <ul class="nav nav-tabs">
+              <li><a href="#">微信</a></li>             
+              <li><a href="#">官网</a></li>             
+              <li class="active"><a href="#">全部订单</a></li>
+            </ul>         
+          </div>
+            {{> UI.contentBlock }}
+        </div>
+    </div>    
+</template>
+
+<template name="boxTpl">  
+    <div class="box border {{theme}}">
+        <div class="box-title">
+            <h4>{{title}}</h4>
+        </div>        
+        <div class="box-body">
+            {{> UI.contentBlock }}
+        </div>
+    </div>    
+</template>
+
+
+<template name="boxTplInfo">  
+    <div class="box border {{theme}}">
+        <div class="box-title">
+            <h4>股东:<span class="name">{{name}}</span></h4>
+            <div class="tools">
+                <a href="#box-config" class="config" data-toggle="modal" data-target="#editorTpl">
+                    <i class="fa fa-cog"></i>
+                </a>
+                <a href="javascript:;" class="collapse">
+                    <i class="fa fa-chevron-up"></i>
+                </a>
+                <a href="javascript:;" class="remove">
+                    <i class="fa fa-times"></i>
+                </a>
+            </div>          
+        </div>        
+        <div class="box-body">
+            {{> UI.contentBlock }}
+        </div>
+    </div>    
+</template>
+
+
+<template name="mini_boxTplInfo">  
+    <div class="box border {{theme}}">
+        <div class="box-title">
+            <h4>股东:<span class="name">{{name}}</span></h4>
+            <div class="tools">
+                <a href="#box-config" class="config" data-toggle="modal" data-target="#editorTpl">
+                    <i class="fa fa-cog"></i>
+                </a>
+                <a href="javascript:;" class="expand">
+                    <i class="fa fa fa-chevron-down"></i>
+                </a>
+                <a href="javascript:;" class="remove">
+                    <i class="fa fa-times"></i>
+                </a>
+            </div>          
+        </div>        
+        <div class="box-body ghost">
+            {{> UI.contentBlock }}
+        </div>
+    </div>    
+</template>

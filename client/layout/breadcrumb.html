@@ -1,0 +1,80 @@
+<template name="breadcrumb">
+    <!-- PAGE HEADER-->
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="page-header">
+                <!-- STYLER -->
+
+                <!-- /STYLER -->
+                <!-- BREADCRUMBS -->
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="fa fa-home"></i>
+                        <a href="/list">主页</a>
+                    </li>
+                    {{#if mainTitle}}
+                    <li>                        
+                      <a href="/list">{{mainTitle}}</a>                        
+                  </li>
+                  {{/if}}                    
+                  {{#if title}}
+                  {{#if productType}}
+                  <li><a href="/list/{{productType}}">{{title}}</a></li>
+                  {{else}}
+                  <li><a href="#">{{title}}</a></li>
+                  {{/if}}
+                  {{/if}}
+
+                  {{#if userList}}
+                  <li><a href="/userList">{{userList}}</a></li>
+                  {{/if}}
+                  {{#if userDetail}}
+                  {{#if userId}}
+                  <li>
+                    <a href="/userDetail/{{userId}}">{{userDetail}}</a>
+                </li>
+                {{else}}
+                <li><a href="/userList">{{userDetail}}</a></li>
+                {{/if}}
+                {{/if}}
+
+                {{#if managerTitle}}
+                {{#if managerType}}
+                <li><a href="/manager/{{managerType}}">{{managerTitle}}</a></li>
+                {{else}}
+                <li><a href="#">{{managerTitle}}</a></li>
+
+                {{/if}}
+                {{/if}}
+                {{#if adminSet}}
+                <li><a href="/adminSet/{{opt}}">{{adminSet}}</a></li>
+                {{/if}}
+            </ul>
+            <!-- /BREADCRUMBS -->
+            <div class="clearfix">
+                <h3 class="content-title pull-left">
+                    {{#if mainTitle}}
+                    {{mainTitle}}
+                    {{#if listNum}}
+                     --{{listNum}}
+                    {{/if}}
+                    {{else}}
+                    {{title}}
+                    {{/if}}                                        
+                </h3>
+            </div>
+            <div class="description"></div>
+        </div>
+    </div>
+</div>
+<!-- /PAGE HEADER -->
+</template>
+
+
+<template name="manageBreadCrumb">
+
+
+</template>
+
+
+

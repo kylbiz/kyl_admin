@@ -1,0 +1,29 @@
+<template name="bookkeepingList">    
+    {{#content title="流量记账包服务套餐" mainTitle="订单管理" productType="bookkeeping" listNum=listNum}}
+    <div class="row">
+        <div class="col-md-12">       
+        {{#source_boxTemplate title="流量记账包服务套餐"}}
+            {{> bookkeepingListPartital }}
+        {{/source_boxTemplate}}
+        </div>
+    </div>    
+    {{/content}}
+</template>
+
+
+<template name="bookkeepingListPartital">
+    {{> ReactiveDatatable tableData=orderlistData options=optionsObject }}
+    <div class="">
+    {{> datetime }}
+    </div>
+</template> 
+
+<template name="bookkeepingView">
+  {{#content title="流量记账包服务套餐" mainTitle="订单管理" productType="bank"}}
+  <div class="row">
+    <div class="col-md-12">
+      {{#boxTemplate title="流量记账包服务套餐"}} {{> detailTpl_partial }} {{/boxTemplate}}
+    </div>
+  </div>
+  {{/content}}
+</template>

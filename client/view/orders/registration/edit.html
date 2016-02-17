@@ -1,0 +1,645 @@
+<template name="editorFactory">
+  {{#content title="公司注册订单编辑" mainTitle="订单管理"}}
+  <div class="row">
+    <div class="col-md-12">
+      {{#boxTemplate title="公司注册订单编辑"}} {{> editorFactory_partial }} {{/boxTemplate}}
+    </div>
+  </div>
+  {{/content}} {{>classify}} {{>itemR}}
+</template>
+
+<template name="editorFactory_partial">
+  <div class="form-group" style="display:none">
+    <input type="text" class="orderId" value="{{order.orderId}}">
+  </div>
+  <div class="form-horizontal editorFactory" role="form">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <h2>订单编号：{{order.orderId}}</h2>
+        </div>
+        <div class="col-sm-12">
+          <div class="row">
+            <!-- {名称 -->
+            <div class="col-sm-6 module" id="baseInfo" data-module="baseInfoEdit">
+              {{#if baseInfoEdit}}
+              <form>
+                <div class="form-group">
+                  <label class="fluid control-label">公司字号</label>
+                  <div class="fluid col-sm-12">
+                    <input class="form-control mainName" value="{{order.companyName.mainName}}">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="fluid control-label">备选名称</label>
+                  <div class="fluid col-sm-12">
+                    <input class="form-control alternativeName1" value="{{order.companyName.alternativeName1}}">
+                    <input class="form-control alternativeName2" value="{{order.companyName.alternativeName2}}">
+                    <input class="form-control alternativeName3" value="{{order.companyName.alternativeName3}}">
+                    <input class="form-control alternativeName4" value="{{order.companyName.alternativeName4}}">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="fluid control-label"></div>
+                  <div class="fluid col-sm-12">
+                    <button class="btn btn-danger saveBtn companyName" type="button">
+                      保存
+                    </button>
+                    <button class="btn btn-warning cancelBtn" type="button">
+                      取消
+                    </button>
+                  </div>
+                </div>
+              </form>
+              {{else}}
+              <div class="form-group">
+                <label class="fluid control-label">公司名称</label>
+                <div class="fluid col-sm-12">
+                  <span class="form-control">{{order.companyNameL}}</span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="fluid control-label">备选名称</label>
+                <div class="fluid col-sm-12">
+                  <span class="form-control">{{order.alternativeName}}</span>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="fluid control-label"></div>
+                <div class="fluid col-sm-12">
+                  <button class="btn btn-danger editBtn" type="button">
+                    编辑
+                  </button>
+                </div>
+              </div>
+              {{/if}}
+            </div>
+            <!-- 名称} -->
+            <div class="col-sm-6 module" data-module="introInfoEdit">
+              {{#if introInfoEdit}}
+              <form>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">对接人</label>
+                <div class="col-sm-10">
+                  <input class="form-control" id="consignerName" value="{{order.consigner.consignerName}}">
+                </div>
+              </div>
+              <div class="form-group">    
+                  <label class="col-sm-2 control-label">手机号</label>
+                  <div class="col-sm-4">
+                        <input class="form-control" id="consignerPhone" value="{{order.consigner.consignerPhone}}">
+                  </div>                                                                  
+                  <label class="col-sm-1 control-label">邮箱</label>
+                  <div class="col-sm-5">
+                        <input class="form-control" id="consignerEmail" value="{{order.consigner.consignerEmail}}">
+                  </div>                                                          
+              </div>                  
+              <div class="form-group">
+                <div class="col-sm-2 control-label"></div>
+                <div class="col-sm-10">
+                    <button class="btn btn-danger saveBtn consignerSave" type="button">
+                      保存
+                    </button>
+                    <button class="btn btn-warning cancelBtn" type="button">
+                      取消
+                    </button>
+                </div>
+              </div> 
+              </form>       
+               {{else}}             
+              <div class="form-group">
+                <label class="col-sm-2 control-label">对接人</label>
+                <div class="col-sm-10">
+                  <span class="form-control">{{order.consigner.consignerName}}</span>
+                </div>
+              </div>
+              <div class="form-group">    
+                  <label class="col-sm-2 control-label">手机号</label>
+                  <div class="col-sm-4">
+                      <span class="form-control">{{order.consigner.consignerPhone}}</span>
+                  </div>                                                                  
+                  <label class="col-sm-1 control-label">邮箱</label>
+                  <div class="col-sm-5">
+                      <span class="form-control">{{order.consigner.consignerEmail}}</span>
+                  </div>                                                          
+              </div>                  
+              <div class="form-group">
+                <div class="col-sm-2 control-label"></div>
+                <div class="col-sm-10">
+                  <button class="btn btn-danger editBtn" type="button">
+                    编辑
+                  </button>
+                </div>
+              </div>               
+              {{/if}}
+            </div>
+          </div>
+        </div>  
+
+        <div class="col-sm-12">
+          <div class="row">
+            <!-- {名称 -->
+            <div class="col-sm-6 module" id="baseInfo" data-module="addressEdit">
+              {{#if addressEdit}}
+              <form>
+                <div class="form-group">
+                  <label class="fluid control-label">注册资本(万元)</label>
+                  <div class="fluid col-sm-12">
+                    <input class="form-control companyMoney" value="{{order.companyMoney}}">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="fluid control-label">公司地址</label>
+                  <div class="fluid col-sm-12">
+                    <input class="form-control companyAddress" value="{{order.companyAddress}}">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="fluid control-label"></div>
+                  <div class="fluid col-sm-12">
+                    <button class="btn btn-danger saveAddress" type="button">
+                      保存
+                    </button>
+                    <button class="btn btn-warning cancelAddress" type="button">
+                      取消
+                    </button>
+                  </div>
+                </div>
+              </form>
+              {{else}}
+              <div class="form-group">
+                <label class="fluid control-label">注册资本(万元)</label>
+                <div class="fluid col-sm-12">
+                  <span class="form-control">{{order.companyMoney}}</span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="fluid control-label">公司地址</label>
+                <div class="fluid col-sm-12">
+                  <span class="form-control">{{order.companyAddress}}</span>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="fluid control-label"></div>
+                <div class="fluid col-sm-12">
+                  <button class="btn btn-danger editAddress" type="button">
+                    编辑
+                  </button>
+                </div>
+              </div>
+              {{/if}}
+            </div>
+          </div>
+        </div> 
+
+
+
+        <div class="col-sm-12 module" data-module="vocationEdit">
+          {{#boxTpl title="行业与经营范围" theme="red"}} {{#if vocationEdit}}
+          <form>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label class="fluid control-label">行业大类</label>
+                  <div class="fluid col-sm-12">
+                    <select class="form-control" id="industryBig">
+                      <option value="null">行业大类</option>
+                      {{#each industryBigLists}}
+                      <option value="{{name}}">{{name}}</option>
+                      {{/each}}
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label class="fluid control-label">行业小类</label>
+                  <div class="fluid col-sm-12">
+                    <select class="form-control" id="industrySmall">
+                      <option value="null">行业小类</option>
+                      {{#each industrySmallLists}}
+                      <option value="{{name}}">{{name}}</option>
+                      {{/each}}
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <div class="fluid control-label"></div>
+                  <div class="fluid col-sm-12">
+                    <button id="industryBtn" class="btn btn-danger" type="button">
+                      保存
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label class="fluid control-label">经营范围</label>
+                  <div class="fluid col-sm-12">
+                    <div class="semantic-table" id="dataTable">
+                      {{#each businessScope}}
+                      <div class="cell td">{{name}}
+                        <label for="" class="checkbox">
+                          <input class="check-control" type="checkbox" checked="checked">
+                        </label>
+                      </div>
+                      {{/each}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <div class="fluid control-label"></div>
+                  <div class="fluid col-sm-12">
+                    <button class="btn btn-danger saveBtn" id="scopeEdit" type="button">
+                      保存
+                    </button>
+                    <button class="btn btn-warning cancelBtn" type="button">
+                      取消
+                    </button>
+                    <a class="btn btn-danger col-sm-offset-1 config" href="#box-config" data-toggle="modal" data-target="#classifyTpl">
+                    新增
+                  </a>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+          {{else}}
+          <div class="form-group">
+            <div class="fluid control-label">
+              行业
+            </div>
+            <div class="fluid col-sm-12">
+              <span class="form-control">
+                {{order.industrySmall}}
+              </span>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="fluid control-label">
+              经营范围
+            </div>
+            <div class="fluid col-sm-12">
+              <span class="form-control textarea">
+                {{order.businessScope}}
+              </span>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="fluid control-label"></div>
+            <div class="fluid col-sm-12">
+              <button class="btn btn-danger editBtn" type="button">
+                编辑
+              </button>
+            </div>
+          </div>
+          {{/if}} {{/boxTpl}}
+        </div>
+        <div class="col-sm-12">
+          <div class="row">
+            <div class="col-lg-6 col-md-12 module" data-module="mainInfoEdit">
+              {{#boxTpl title="法人与监事信息" theme="red"}} {{#if mainInfoEdit}}
+              <div class="form-group">
+                <label class="fluid control-label">法人</label>
+                <div class="fluid col-sm-12">
+                  <input class="form-control legalPersonName" value="{{order.legalPerson.legalPersonName}}">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="fluid control-label">身份证号</label>
+                <div class="fluid col-sm-12">
+                  <input class="form-control legalPersonId" value="{{order.legalPerson.legalPersonId}}">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="fluid control-label">法人手机</label>
+                <div class="fluid col-sm-12">
+                  <input class="form-control legalPersonPhone" value="{{order.legalPerson.legalPersonPhone}}">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="fluid control-label">法人电话</label>
+                <div class="fluid col-sm-12">
+                  <input class="form-control legalPersonTel" value="{{order.legalPerson.legalPersonTel}}">
+                </div>
+              </div>              
+              <div class="form-group">
+                <label class="fluid control-label">法人邮箱</label>
+                <div class="fluid col-sm-12">
+                  <input class="form-control legalPersonEmail" value="{{order.legalPerson.legalPersonEmail}}">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="fluid control-label">监事</label>
+                <div class="fluid col-sm-12">
+                  <input class="form-control supervisorName" value="{{order.supervisor.supervisorName}}">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="fluid control-label">身份证号</label>
+                <div class="fluid col-sm-12">
+                  <input class="form-control supervisorId" value="{{order.supervisor.supervisorId}}">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="fluid control-label"></div>
+                <div class="fluid col-sm-12">
+                  <button class="btn btn-danger saveBtn personInfo" type="button">
+                    保存
+                  </button>
+                  <button class="btn btn-warning cancelBtn" type="button">
+                    取消
+                  </button>
+                </div>
+              </div>
+              {{else}}
+              <div class="form-group">
+                <label class="fluid control-label">法人姓名</label>
+                <div class="fluid col-sm-12">
+                  <span class="form-control">{{order.legalPerson.legalPersonName}}</span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="fluid control-label">身份证号</label>
+                <div class="fluid col-sm-12">
+                  <span class="form-control">{{order.legalPerson.legalPersonId}}</span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="fluid control-label">法人手机</label>
+                <div class="fluid col-sm-12">
+                  <span class="form-control">{{order.legalPerson.legalPersonPhone}}</span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="fluid control-label">法人电话</label>
+                <div class="fluid col-sm-12">
+                  <span class="form-control">{{order.legalPerson.legalPersonTel}}</span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="fluid control-label">法人邮箱</label>
+                <div class="fluid col-sm-12">
+                  <span class="form-control">{{order.legalPerson.legalPersonEmail}}</span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="fluid control-label">监事</label>
+                <div class="fluid col-sm-12">
+                  <span class="form-control">{{order.supervisor.supervisorName}}</span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="fluid control-label">身份证号</label>
+                <div class="fluid col-sm-12">
+                  <span class="form-control">{{order.supervisor.supervisorId}}</span>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="fluid control-label"></div>
+                <div class="fluid col-sm-12">
+                  <button class="btn btn-danger editBtn" type="button">
+                    编辑
+                  </button>
+                </div>
+              </div>
+              {{/if}} {{/boxTpl}}
+            </div>
+            <div class="col-lg-6 col-md-12 module" data-module="expressInfoEdit">
+              {{#boxTpl title="收货地址" theme="red"}} {{#if expressInfoEdit}}
+              <form>
+                <div class="form-group" style="display:none">
+                  <input type="text" class="relationId" value="{{order.relationId}}">
+                </div>
+                <div class="form-group">
+                  <label class="fluid control-label">收货人姓名</label>
+                  <div class="fluid col-sm-12">
+                    <input class="form-control receiver" value="{{order.addressInfo.receiver}}">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="fluid control-label">收货人地址</label>
+                  <div class="fluid col-sm-12">
+                    <input class="form-control address" value="{{order.addressInfo.address}}">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="fluid control-label">电话</label>
+                  <div class="fluid col-sm-12">
+                    <input class="form-control phone" value="{{order.addressInfo.phone}}">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="fluid control-label">邮编</label>
+                  <div class="fluid col-sm-12">
+                    <input class="form-control zipcode" value="{{order.addressInfo.zipcode}}">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="fluid control-label"></div>
+                  <div class="fluid col-sm-12">
+                    <button class="btn btn-danger saveBtn addressInfo" type="button">
+                      保存
+                    </button>
+                    <button class="btn btn-warning cancelBtn" type="button">
+                      取消
+                    </button>
+                  </div>
+                </div>
+              </form>
+              {{else}}
+              <div class="form-group">
+                <label class="fluid control-label">收货人姓名</label>
+                <div class="fluid col-sm-12">
+                  <span class="form-control">{{order.addressInfo.receiver}}</span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="fluid control-label">收货人地址</label>
+                <div class="fluid col-sm-12">
+                  <span class="form-control">{{order.addressInfo.address}}</span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="fluid control-label">电话</label>
+                <div class="fluid col-sm-12">
+                  <span class="form-control">{{order.addressInfo.phone}}</span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="fluid control-label">邮编</label>
+                <div class="fluid col-sm-12">
+                  <span class="form-control">{{order.addressInfo.zipcode}}</span>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="fluid control-label"></div>
+                <div class="fluid col-sm-12">
+                  <button class="btn btn-danger editBtn" type="button">
+                    编辑
+                  </button>
+                </div>
+              </div>
+              {{/if}} {{/boxTpl}}
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-sm-12 module" data-module="contractorEdit">         
+          {{#boxTpl title="负责人" theme="red"}}
+           
+           {{#if contractorEdit}}
+    
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label class="fluid control-label">企业联络人</label>
+                    <div class="fluid col-sm-12">
+                      <input class="form-control" id="liaisonsName" value="{{order.contractor.liaisons.liaisonsName}}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="fluid control-label">身份证号</label>
+                    <div class="fluid col-sm-12">
+                      <input class="form-control" id="liaisonsId" value="{{order.contractor.liaisons.liaisonsId}}">
+                    </div>
+                  </div>   
+                  <div class="form-group">
+                    <label class="fluid control-label">手机号</label>
+                    <div class="fluid col-sm-12">
+                      <input class="form-control" id="liaisonsPhone" value="{{order.contractor.liaisons.liaisonsPhone}}">
+                    </div>
+                  </div>           
+                  <div class="form-group">
+                    <label class="fluid control-label">邮箱</label>
+                    <div class="fluid col-sm-12">
+                      <input class="form-control" id="liaisonsEmail" value="{{order.contractor.liaisons.liaisonsEmail}}">
+                    </div>
+                  </div>                                    
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label class="fluid control-label">财务负责人</label>
+                    <div class="fluid col-sm-12">
+                      <input class="form-control" id="financialStaffName" value="{{order.contractor.financialStaff.financialStaffName}}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="fluid control-label">身份证号</label>
+                    <div class="fluid col-sm-12">
+                      <input class="form-control" id="financialStaffId" value="{{order.contractor.financialStaff.financialStaffId}}">
+                    </div>
+                  </div>   
+                  <div class="form-group">
+                    <label class="fluid control-label">手机号</label>
+                    <div class="fluid col-sm-12">
+                      <input class="form-control" id="financialStaffPhone" value="{{order.contractor.financialStaff.financialStaffPhone}}">
+                    </div>
+                  </div> 
+                  <div class="form-group">
+                    <label class="fluid control-label">邮箱</label>
+                    <div class="fluid col-sm-12">
+                      <input class="form-control" id="financialStaffEmail" value="{{order.contractor.financialStaff.financialStaffEmail}}">
+                    </div>
+                  </div>                                   
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <div class="fluid control-label"></div>
+                    <div class="fluid col-sm-12">
+                      <button class="btn btn-danger saveBtn saveContractor" type="button">
+                        保存
+                      </button>
+                      <button class="btn btn-warning cancelBtn" type="button">
+                        取消
+                      </button>
+                    </div>
+                  </div>
+                </div>              
+              </div>           
+             {{else}}
+            <form>       
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label class="fluid control-label">企业联络人</label>
+                    <div class="fluid col-sm-12">
+                      <span class="form-control">{{order.contractor.liaisons.liaisonsName}}</span>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="fluid control-label">身份证号</label>
+                    <div class="fluid col-sm-12">
+                      <span class="form-control"> {{order.contractor.liaisons.liaisonsId}}</span>
+                    </div>
+                  </div>   
+                  <div class="form-group">
+                    <label class="fluid control-label">手机号</label>
+                    <div class="fluid col-sm-12">
+                      <span class="form-control">{{order.contractor.liaisons.liaisonsPhone}}</span>
+                    </div>
+                  </div>           
+                  <div class="form-group">
+                    <label class="fluid control-label">邮箱</label>
+                    <div class="fluid col-sm-12">
+                      <span class="form-control">{{order.contractor.liaisons.liaisonsEmail}}</span>
+                    </div>
+                  </div>                                    
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label class="fluid control-label">财务负责人</label>
+                    <div class="fluid col-sm-12">
+                      <span class="form-control">{{order.contractor.financialStaff.financialStaffName}}</span>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="fluid control-label">身份证号</label>
+                    <div class="fluid col-sm-12">
+                      <span class="form-control">{{order.contractor.financialStaff.financialStaffId}}</span>
+                    </div>
+                  </div>   
+                  <div class="form-group">
+                    <label class="fluid control-label">手机号</label>
+                    <div class="fluid col-sm-12">
+                      <span class="form-control">{{order.contractor.financialStaff.financialStaffPhone}}</span>
+                    </div>
+                  </div> 
+                  <div class="form-group">
+                    <label class="fluid control-label">邮箱</label>
+                    <div class="fluid col-sm-12">
+                      <span class="form-control">{{order.contractor.financialStaff.financialStaffEmail}}</span>
+                    </div>
+                  </div>                                   
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <div class="fluid control-label"></div>
+                    <div class="fluid col-sm-12">
+                      <button class="btn btn-danger editBtn" type="button">
+                        编辑
+                      </button>
+                    </div>
+                  </div>
+                </div>              
+              </div>
+            </form>
+            {{/if}}
+          {{/boxTpl}}
+        </div>              
+      </div>
+    </div>
+  </div>
+</template>

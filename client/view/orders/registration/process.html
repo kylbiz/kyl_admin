@@ -1,0 +1,38 @@
+<template name="processTpl">
+    <div class="modal fade" id="processTpl" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">编辑订单状态</h4>
+          </div>
+          <div class="modal-body">
+               <div class="process-box">
+                    <div class="circle active">
+                        <span class="progressL" data-code="0">提交资料</span>
+                    </div>
+                    <div class="circle">
+                        <span class="progressL" data-code="1">核名</span>
+                    </div>
+                    <div class="circle">
+                        <span class="progressL" data-code="2">股东签字确认</span>
+                    </div>
+                    <div class="circle">
+                        <span class="progressL" data-code="3">工商注册登记</span>
+                    </div>
+                    <div class="circle">
+                        <span class="progressL" data-code="4">领取企业代码证</span>
+                    </div>               
+               </div>         
+          </div>
+          <div class="modal-notify">
+              当前订单执行状态为未执行，是否进行下一步？
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-primary">确认</button>
+          </div>
+        </div>
+      </div>
+    </div>     
+</template>

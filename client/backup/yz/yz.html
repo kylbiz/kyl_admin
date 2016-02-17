@@ -1,0 +1,398 @@
+<!-- <template name="yzorderlists">
+  {{#content title="有赞订单"}}
+  <div class="row">
+    <div class="col-md-12">       
+      {{#boxTemplate title="有赞订单"}}
+      <div class="form-group">
+        <button class="btn btn-danger getyzorders">获取有赞订单信息</button>  
+      </div>
+      {{> yxorder}}
+      {{/boxTemplate}}
+    </div>
+  </div>    
+  {{/content}}
+</template>
+
+<template name="yxorder">
+  {{> ReactiveDatatable tableData=orderlistData options=optionsObject }}
+</template>
+
+<template name="yzorderdetail">
+  {{#content title="有赞订单" productType="yzorderlists"}}
+  <div class="row">
+    <div class="col-md-12">
+      {{#boxTemplate title="有赞订单"}} {{> yzdetail}} {{/boxTemplate}}
+    </div>
+  </div>
+  {{/content}}
+</template>
+
+<template name="yzdetail">
+  <div class="form-horizontal">
+    <div class="col-md-6 col-sm-12">
+      <div class="form-group">
+        <label class="col-md-3 control-label">交易编号</label>
+        <div class="col-md-9">
+          <span class="form-control">
+            {{order.tid}}
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">商品名称</label>
+        <div class="col-md-9">
+          <span class="form-control">
+            {{order.title}}
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label  class="col-md-3 control-label">购买数量</label>
+        <div class="col-md-9">
+          <span class="form-control">
+            {{order.yzProductNum}}
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">商品价格</label>
+        <div class="col-md-9">
+          <span class="form-control">
+            {{order.price}}
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">交易类型</label>
+        <div class="col-md-9">
+          <span class="form-control">
+            {{order.yzordertype}}
+          </span>
+        </div>
+      </div>
+      <div class="separator"></div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">商品总价</label>
+        <div class="col-md-9">
+          <span class="form-control">
+            {{order.total_fee}}
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">实付金额</label>
+        <div class="col-md-9">
+          <span class="form-control">
+            {{order.payment}}
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">交易优惠金额</label>
+        <div class="col-md-9">
+          <span class="form-control">
+            {{order.discount_fee}}
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">卖家手工调整订单金额</label>
+        <div class="col-md-9">
+          <span class="form-control">
+            {{order.adjust_fee}}
+          </span>
+        </div>
+      </div> 
+      <div class="form-group">
+        <label class="col-md-3 control-label">交易完成后退款的金额</label>
+        <div class="col-md-9">
+          <span class="form-control">
+            {{order.refunded_fee}}
+          </span>
+        </div>
+      </div>   
+      <div class="separator"></div>  
+      <div class="form-group">
+        <label class="col-md-3 control-label">支付类型</label>
+        <div class="col-md-9">
+          <span class="form-control">
+            {{order.yzpaytype}}
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">交易创建时间</label>
+        <div class="col-md-9">
+          <span class="form-control">
+            {{order.created}}
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">交易更新时间</label>
+        <div class="col-md-9">
+          <span class="form-control">
+            {{order.update_time}}
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">买家付款时间</label>
+        <div class="col-md-9">
+          <span class="form-control">
+            {{order.pay_time}}
+          </span>
+        </div>
+      </div>
+
+      <div class="separator"></div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">交易维权状态</label>
+        <div class="col-md-9">
+          <span class="form-control">
+            {{order.yzfeedback}}
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-md-3 control-label">退款状态</label>
+        <div class="col-md-9">
+          <span class="form-control">
+            {{order.yzrefundstate}}
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">交易状态</label>
+        <div class="col-md-9">
+          <span class="form-control">
+            {{order.yzorderstatus}}
+          </span>
+        </div>
+      </div>
+
+      <div class="separator"></div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">卖家发货时间</label>
+        <div class="col-md-9">
+          <span class="form-control">
+            {{order.consign_time}}
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">买家签收时间</label>
+        <div class="col-md-9">
+          <span class="form-control">
+            {{order.sign_time}}
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">买家下单的地区</label>
+        <div class="col-md-9">
+          <span class="form-control">
+            {{order.buyer_area}}
+          </span>
+        </div>
+      </div>
+      <div class="separator"></div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">买家昵称</label>
+        <div class="col-md-9">
+          <span class="form-control">
+            {{order.buyer_nick}}
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">买家类型</label>
+        <div class="col-md-9">
+          <span class="form-control">
+            {{order.buyer_type}}
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">买家附言</label>
+        <div class="col-md-9">
+          <span class="form-control">
+            {{order.buyer_message}}
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">卖家备注</label>
+        <div class="col-md-9">
+          <span class="form-control">
+            {{order.trade_memo}}
+          </span>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-md-6 col-sm-12">
+      <div class="form-group">
+        <label class="col-md-3 control-label">收货人的姓名</label>
+        <div class="col-md-9">
+          <span class="form-control">
+            {{order.receiver_name}}
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">收货人手机</label>
+        <div class="col-md-9">
+          <span class="form-control">
+            {{order.receiver_mobile}}
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">收货人邮编</label>
+        <div class="col-md-9">
+          <span class="form-control">
+            {{order.receiver_zip}}
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">收货人地址</label>
+        <div class="col-md-9">
+          <span class="form-control textarea">
+            {{order.receiver_state}} {{order.receiver_city}}
+            {{order.receiver_district}} {{order.receiver_address}} 
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">物流方式</label>
+        <div class="col-md-9">
+          <span class="form-control">
+            {{order.yzshippingtype}}
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">运费</label>
+        <div class="col-md-9">
+          <span class="form-control">
+            {{order.post_fee}}
+          </span>
+        </div>
+      </div>
+
+      <div class="separator"></div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">卡券ID</label>
+        <div class="col-md-9">
+          <span class="form-control">
+            {{order.coupon_details.coupon_id}}
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-md-3 control-label">卡券名称</label>
+        <div class="col-md-9">
+          <span class="form-control">
+            {{order.coupon_details.coupon_name}}
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">优惠金额</label>
+        <div class="col-md-9">
+          <span class="form-control">
+            {{order.coupon_details.discount_fee}}
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">卡券类型</label>
+        <div class="col-md-9">
+          <span class="form-control">
+            {{order.yzcoupontype}}
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">卡券内容</label>
+        <div class="col-md-9">
+          <span class="form-control">
+            {{order.coupon_details.coupon_content}}
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">卡券的说明</label>
+        <div class="col-md-9">
+          <span class="form-control">
+            {{order.coupon_details.coupon_description}}
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">卡券使用条件说明</label>
+        <div class="col-md-9">
+          <span class="form-control">
+            {{order.coupon_details.coupon_condition}}
+          </span>
+        </div>
+      </div>
+      <div class="separator"></div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">优惠活动ID</label>
+        <div class="col-md-9">
+          <span class="form-control">
+            {{order.promotion_details.promotion_id}}
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">优惠活动名称</label>
+        <div class="col-md-9">
+          <span class="form-control">
+            {{order.promotion_details.promotion_name}}
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">优惠金额</label>
+        <div class="col-md-9">
+          <span class="form-control">
+            {{order.promotion_details.discount_fee}}
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">优惠类型</label>
+        <div class="col-md-9">
+          <span class="form-control">
+            {{order.promotion_details.promotion_type}}
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">优惠使用条件说明</label>
+        <div class="col-md-9">
+          <span class="form-control">
+            {{order.promotion_details.promotion_condition}}
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">使用时间</label>
+        <div class="col-md-9">
+          <span class="form-control">
+            {{order.promotion_details.used_at}}
+          </span>
+        </div>
+      </div>
+      <a href="/list/yzorderlists"><button class="btn btn-primary" type="button">返回微信订单列表</button></a>
+    </div>
+  </div>
+</template>
+
+ -->

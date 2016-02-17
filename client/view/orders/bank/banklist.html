@@ -1,0 +1,29 @@
+<template name="bankList">    
+    {{#content title="银行开户订单" mainTitle="订单管理" productType="bank" listNum=listNum}}
+    <div class="row">
+        <div class="col-md-12">       
+        {{#source_boxTemplate title="银行开户订单"}}
+            {{> bankList_partial }}
+        {{/source_boxTemplate}}
+        </div>
+    </div>    
+    {{/content}}
+</template>
+
+
+<template name="bankList_partial">
+    {{> ReactiveDatatable tableData=orderlistData options=optionsObject }}
+    <div class="">
+    {{> datetime }}
+    </div>
+</template> 
+
+<template name="bankView">
+  {{#content title="银行开户" mainTitle="订单管理" productType="bank"}}
+  <div class="row">
+    <div class="col-md-12">
+      {{#boxTemplate title="银行开户"}} {{> detailTpl_partial }} {{/boxTemplate}}
+    </div>
+  </div>
+  {{/content}}
+</template>

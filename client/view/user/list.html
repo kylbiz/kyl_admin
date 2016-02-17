@@ -1,0 +1,17 @@
+<template name="userList">
+    {{#content userList="用户列表" title="用户管理"}}
+    <div class="row">
+        <div class="col-md-12">       
+        {{#boxTemplate title="用户管理"}}
+            {{> userList_partial }}
+        {{/boxTemplate}}
+        </div>
+    </div>    
+    {{/content}}
+</template>
+
+
+<template name="userList_partial">
+    {{> ReactiveDatatable tableData=userlistData options=optionsObject class='datatable' }}
+    {{> datetime }}  
+</template>

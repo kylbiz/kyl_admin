@@ -1,0 +1,79 @@
+<template name="adminSet">        
+    {{#content adminSet="后台用户操作" managerTitle="后台用户管理" opt=_id}}
+    <div class="row">
+        <div class="col-md-12">       
+        {{#boxTemplate title="管理员用户管理"}}
+            {{> adminDetail_partial }}
+        {{/boxTemplate}}
+        </div>
+    </div>    
+    {{/content}}
+</template>
+
+<template name="adminDetail_partial">
+  <div class="form-horizontal def">
+    <div class="form-group">
+      <label class="col-sm-3 control-label">名字</label>
+      <div class="col-sm-9">
+        <!-- <span class="form-control">{{profile.nickname}}</span> -->
+        <input class="form-control" id="username" value={{username}} />
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">电话</label>
+      <div class="col-sm-9">
+        <input class="form-control" id="phone" value={{profile.phone}} />
+        <!-- <span class="form-control">{{profile.phone}}</span> -->
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">邮箱</label>
+      <div class="col-sm-9">
+        <input class="form-control" id="email" value={{profile.email}} />
+        <!-- <span class="form-control">{{profile.email}}</span> -->
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">密码</label>
+      <div class="col-sm-9">
+        <input class="form-control" id="password" type="password" />
+        <!-- <span class="form-control">{{profile.email}}</span> -->
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">权限</label>
+      <div class="col-sm-9">
+        <div class="semantic-table">
+            <div class="cell">查看订单
+              <label for="" class="checkbox">
+                <input type="checkbox" name="permissions" checked={{permissions.vieworders}}>
+              </label>
+            </div>
+            <div class="cell">修改订单
+              <label for="" class="checkbox">
+                <input type="checkbox" name="permissions" checked={{permissions.editorders}}>
+              </label>
+            </div>
+            <div class="cell">管理后台用户
+              <label for="" class="checkbox">
+                <input type="checkbox" name="permissions" checked={{permissions.manageusers}}>
+              </label>
+            </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-3 control-label"></label>
+      <div class="col-sm-9">
+          <button class="btn btn-info backbtn" type="button">
+            返回/取消
+          </button>
+           <button class="btn btn-info savebtn col-sm-offset-1" type="button">
+            保存
+          </button>   
+      </div>       
+    </div>                     
+  </div>
+</template>

@@ -1,0 +1,136 @@
+<!-- <template name="wxorderlists">
+  {{#content title="旧版微信"}}
+  <div class="row">
+    <div class="col-md-12">       
+      {{#boxTemplate title="旧版微信"}}
+      <div class="form-group">
+        <button class="btn btn-danger getwxorders">获取旧版微信订单信息</button>  
+      </div>
+      {{> wechatorderlistsTpl }}
+      {{/boxTemplate}}
+    </div>
+  </div>    
+  {{/content}}
+</template>
+
+<template name="wechatorderlistsTpl">
+  {{> ReactiveDatatable tableData=orderlistData options=optionsObject }}
+</template>
+
+
+<template name="wxorderdetail">
+
+  {{#content title="旧版微信" productType="wxorderlists"}}
+  <div class="row">
+    <div class="col-md-12">
+      {{#boxTemplate title="旧版微信"}} {{> wxdetail }} {{/boxTemplate}}
+    </div>
+  </div>
+  {{/content}}
+</template>
+
+<template name="wxdetail">
+  <div class="form-horizontal">
+    <div class="col-md-6 col-sm-12">
+      <div class="form-group">
+        <label class="col-md-3 control-label">订单编号</label>
+        <div class="col-md-9">
+          <span class="form-control">
+            {{order.order_id}}
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">订单状态</label>
+        <div class="col-md-9">
+          <span class="form-control">
+            {{order.order_statusL}}
+          </span>    
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">订单价格(元)</label>
+        <div class="col-md-9">
+          <span class="form-control">
+            {{order.order_total_priceL}}
+          </span>
+        </div>
+      </div>
+      <div class="separator"></div> 
+      <div class="form-group">
+        <label class="col-md-3 control-label">产品名称</label>
+        <div class="col-md-9">
+          <span class="form-control">
+            {{order.product_name}}
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">产品价格（元）</label>
+        <div class="col-md-9">
+          <span class="form-control">
+            {{order.product_priceL}}
+          </span>    
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">产品数量</label>
+        <div class="col-md-9">
+          <span class="form-control">
+            {{order.product_count}}
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-sm-12">
+      <div class="form-group">
+        <label class="col-md-3 control-label">收货人姓名</label>
+        <div class="col-md-9">
+          <span class="form-control">
+            {{order.receiver_name}}
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">收货人联系方式</label>
+        <div class="col-md-9">
+          <span class="form-control">
+            {{order.receiver_mobile}} / {{order.receiver_phone}}
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">收货人地址</label>
+        <div class="col-md-9">
+          <span class="form-control textarea">
+            {{order.receiver_province}} {{order.receiver_city}}
+            {{order.receiver_zone}} {{order.receiver_address}}
+          </span>
+        </div>
+      </div>
+      <div class="separator"></div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">交易ID</label>
+        <div class="col-md-9">
+          <span class="form-control">
+            {{order.trans_id}}
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">订单生成时间</label>
+        <div class="col-md-9">
+          <span class="form-control">
+            {{order.order_create_timeL}}
+          </span>    
+        </div>
+      </div> 
+      <a href="/list/wxorderlists"><button class="btn btn-primary" type="button">返回微信订单列表</button></a>
+    </div>
+  </div>
+</template>
+
+
+
+ -->

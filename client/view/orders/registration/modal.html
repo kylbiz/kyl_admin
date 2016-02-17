@@ -1,0 +1,114 @@
+<template name="editorTpl">
+    <div class="modal fade" id="editorTpl" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">编辑股东信息</h4>
+          </div>
+          <div class="modal-body">
+            <form>
+              <input type="text" class="modalHolderId" style="display:none;">
+              <div class="form-group">
+                <label for="recipient-name" class="control-label">姓名:</label>
+                <input type="text" class="form-control name holderName" name="name">
+              </div>
+              <div class="form-group">
+                  <label for="" class="control-label">类型</label>
+                  <select name="" id="" class="form-control holderType">
+                    <option value="自然人">自然人</option>
+                    <option value="企业">企业</option>
+                  </select>
+              </div>
+
+              <div class="form-group">
+                  <label for="" class="control-label">性别</label>
+                  <select name="" id="" class="form-control holderSex">
+                    <option value="男">男</option>
+                    <option value="女">女</option>
+                  </select>                  
+              </div>              
+              <div class="form-group">
+                <label for="recipient-name" class="control-label">身份证:</label>
+                <input type="text" class="form-control cardId holderCode" name="cardId">
+              </div>              
+              <div class="form-group">
+                <label for="message-text" class="control-label">出资额:</label>
+                <input type="text" class="form-control money holderMoney" name="money" placeholder="单位：万元">
+              </div>
+              <div class="form-group">
+                <label for="message-text" class="control-label">占股比例:</label>
+                <input type="text" class="form-control moneyPercent" name="moneyPercent" placeholder="占股比例">
+              </div>              
+              <div class="form-group">
+                <label for="message-text" class="control-label">户籍地址:</label>
+                <textarea class="form-control address holderAddress" name="address"></textarea>
+              </div>              
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-primary confirm">确认</button>
+          </div>
+        </div>
+      </div>
+    </div>   
+</template>
+
+<template name="addTpl">
+    <div class="modal fade" id="addTpl" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">新增股东</h4>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="recipient-name" class="control-label">姓名:</label>
+                <input type="text" class="form-control name holderAName" name="name">
+              </div>
+
+              <div class="form-group">
+                  <label for="" class="control-label">类型</label>
+                  <select name="" id="" class="form-control holderAType">
+                    <option value="自然人">自然人</option>
+                    <option value="企业">企业</option>
+                  </select>
+              </div>
+
+              <div class="form-group">
+                  <label for="" class="control-label">性别</label>
+                  <select name="" id="" class="form-control holderASex">
+                    <option value="男">男</option>
+                    <option value="女">女</option>
+                  </select>                  
+
+              </div>
+              <div class="form-group">
+                <label for="recipient-name" class="control-label">身份证:</label>
+                <input type="text" class="form-control cardId holderACode" name="cardId">
+              </div>              
+              <div class="form-group">
+                <label for="message-text" class="control-label">出资额:</label>
+                <input type="text" class="form-control money holderAMoney" name="money" placeholder="单位：万元">
+              </div>
+              <div class="form-group">
+                <label for="message-text" class="control-label">占股比例:</label>
+                <input type="text" class="form-control moneyAPercent" name="moneyPercent" placeholder="占股比例">
+              </div>                
+              <div class="form-group">
+                <label for="message-text" class="control-label">户籍地址:</label>
+                <textarea class="form-control address holderAAddress" name="address"></textarea>
+              </div>              
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-primary submit">确认</button>
+          </div>
+        </div>
+      </div>
+    </div>   
+</template>

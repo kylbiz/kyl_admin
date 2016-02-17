@@ -1,0 +1,227 @@
+<template name="profile">
+  {{#content mainTitle="个人信息"}}
+  <div class="row">
+    <div class="col-md-12">
+      {{> profile_partial }}
+    </div>
+  </div>
+  {{/content}}
+</template>
+
+<template name="profile_partial">
+  <!-- USER PROFILE -->
+  <!-- BOX -->
+  <div class="box border">
+    <div class="box-title">
+      <h4><i class="fa fa-user"></i><span class="hidden-inline-mobile">你好, {{currentUser.username}}!</span></h4>
+    </div>
+    <div class="box-body">
+      <div class="tabbable header-tabs user-profile">
+        <ul class="nav nav-tabs">
+         <li><a href="#edit_password" data-toggle="tab"><i class="fa fa-dot-circle-o"></i> <span class="">修改密码</span></a>
+         </li>       
+         <li class="active"><a href="#pro_overview" data-toggle="tab"><i class="fa fa-dot-circle-o"></i> <span class="">个人资料</span></a>
+         </li>
+       </ul>
+       <div class="tab-content">
+        <!-- OVERVIEW -->
+        <div class="tab-pane fade in active" id="pro_overview">
+          <div class="row">
+            <!-- PROFILE PIC -->
+            <div class="col-md-3">
+              <div class="list-group">
+                <div class="list-group-item profile-details">
+                  <h2>管理员</h2>
+                  <p>{{currentUser.username}}</p>
+                  <!-- <p>男</p> -->
+                </div>
+
+                <li class="list-group-item"><i class="fa fa-user fa-fw"></i> 联系信息</li>
+                <li class="list-group-item">
+                  <div class="form-group">
+                    <div class="control-label fluid">电话</div>
+                    <div class="col-sm-12 fluid">
+                      {{currentUser.profile.phone}}
+                    </div>
+                  </div>
+                </li>
+                <li class="list-group-item">
+                  <div class="form-group">
+                    <div class="control-label fluid">邮箱</div>
+                    <div class="col-sm-12 fluid">
+                      {{currentUser.profile.email}}
+                    </div>
+                  </div>
+                </li>
+
+              </div>
+            </div>
+            <!-- /PROFILE PIC -->
+            <!-- PROFILE DETAILS -->
+            <div class="col-md-9">
+
+              <!-- ROW  -->
+              <div class="row">
+                <div class="col-md-12">
+                  <form class="form-horizontal" action="#">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="box border inverse">
+                          <div class="box-title">
+                            <h4><i class="fa fa-bars"></i>编辑资料</h4>
+                          </div>
+                          <div class="box-body big">
+                            <div class="row">
+                              <div class="col-md-12">
+                                <h4>基础信息</h4>
+                                <div class="form-group">
+                                  <label class="col-md-4 control-label">姓名</label>
+                                  <div class="col-md-8">
+                                    <input type="text" name="username" class="form-control" value={{currentUser.username}}>
+                                  </div>
+                                </div>
+                                  <!-- <div class="form-group">
+                                    <label class="col-md-4 control-label">性别</label>
+                                    <div class="col-md-8">
+                                      <label class="radio">
+                                        <input type="radio" class="uniform" name="optionsRadios1" value="option1"> 男 </label>
+                                      <label class="radio">
+                                        <input type="radio" class="uniform" name="optionsRadios1" value="option2" checked> 女 </label>
+                                    </div>
+                                  </div> -->
+                                  <h4>联系信息</h4>
+                                  <div class="form-group">
+                                    <label class="col-md-4 control-label">电话</label>
+                                    <div class="col-md-8">
+                                      <input type="text" name="phone" class="form-control" value={{currentUser.profile.phone}}>
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label class="col-md-4 control-label">邮箱</label>
+                                    <div class="col-md-8">
+                                      <input type="text" name="email" class="form-control" value={{currentUser.profile.email}}>
+                                    </div>
+                                  </div>
+
+                                 <!--  <div class="form-group">
+                                    <label class="col-md-4 control-label">邮箱</label>
+                                    <div class="col-md-8">
+                                      <textarea name="regular" class="form-control"></textarea>
+                                    </div>
+                                  </div> -->
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                    <div class="form-actions clearfix">
+                      <input type="submit" value="保存" class="btn btn-primary pull-right savebtn_basic"> 
+                    </div>
+                  </div>
+                </div>
+                <!-- /ROW -->
+              </div>
+              <!-- /PROFILE DETAILS -->
+            </div>
+          </div>
+          <!-- /OVERVIEW -->
+
+          <!-- OVERVIEW eidt password-->
+          <div class="tab-pane fade" id="edit_password">
+            <div class="row">
+              <!-- PROFILE PIC -->
+              <div class="col-md-3">
+                <div class="list-group">
+                  <div class="list-group-item profile-details">
+                    <h2>管理员</h2>
+                    <p>{{currentUser.username}}</p>
+                    <!-- <p>男</p> -->
+                  </div>
+
+                  <li class="list-group-item"><i class="fa fa-user fa-fw"></i> 联系信息</li>
+                  <li class="list-group-item">
+                    <div class="form-group">
+                      <div class="control-label fluid">电话</div>
+                      <div class="col-sm-12 fluid">
+                        {{currentUser.profile.phone}}
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item">
+                    <div class="form-group">
+                      <div class="control-label fluid">邮箱</div>
+                      <div class="col-sm-12 fluid">
+                        {{currentUser.profile.email}}
+                      </div>
+                    </div>
+                  </li>
+
+                </div>
+              </div>
+              <!-- /PROFILE PIC -->
+              <!-- PROFILE DETAILS -->
+              <div class="col-md-9">
+
+                <!-- ROW  -->
+                <div class="row">
+                  <div class="col-md-12">
+                    <form class="form-horizontal" action="#">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="box border inverse">
+                            <div class="box-title">
+                              <h4><i class="fa fa-bars"></i>修改密码</h4>
+                            </div>
+                            <div class="box-body big">
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <div class="form-group">
+                                    <label class="col-md-4 control-label">旧密码</label>
+                                    <div class="col-md-8">
+                                      <input type="password" name="password_old" class="form-control" value="">
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label class="col-md-4 control-label">新密码</label>
+                                    <div class="col-md-8">
+                                      <input type="password" name="password_new" class="form-control" value="">
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label class="col-md-4 control-label">重复新密码</label>
+                                    <div class="col-md-8">
+                                      <input type="password" name="password_repeat" class="form-control" value="">
+                                    </div>
+                                  </div>
+                                  <div class="form-group shadow" id="warn_div">
+                                    <div class="alert alert-danger col-md-8 col-sm-offset-4" role="alert">
+                                      <label class="control-label" id="warn_lab">warn: </label>
+                                    </div>
+                                  </div>
+                                  
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                    <div class="form-actions clearfix">
+                      <input type="submit" value="保存" class="btn btn-primary pull-right savebtn_passwd"> 
+                    </div>
+                  </div>
+                </div>
+                <!-- /ROW -->
+              </div>
+              <!-- /PROFILE DETAILS -->
+            </div>
+          </div>
+          <!-- /OVERVIEW edit password-->          
+        </div>
+      </div>
+      <!-- /USER PROFILE -->
+    </div>
+  </div>
+</template>

@@ -1,0 +1,167 @@
+<template name="assuranceList">    
+    {{#content title="社保代理"  mainTitle="订单管理" productType="assurance" listNum=listNum}}
+    <div class="row">
+        <div class="col-md-12">       
+        {{#source_boxTemplate title="社保代理"}}
+            {{> assurancelist_partial }}
+        {{/source_boxTemplate}}
+        </div>
+    </div> 
+    {{/content}}
+</template>
+
+<template name="assurancelist_partial">
+    {{> ReactiveDatatable tableData=orderlistData options=optionsObject }}
+    <div class="">
+    {{> datetime }}
+    </div>
+</template> 
+
+
+<template name="assuranceView">
+  {{#content title="社保代理" mainTitle="订单管理" productType="assurance"}}
+  <div class="row">
+    <div class="col-md-12">
+      {{#boxTemplate title="社保代理"}} {{> detailTpl_partial }} {{/boxTemplate}}
+    </div>
+  </div>
+  {{/content}}
+</template>
+
+<template name="detailTpl_partial">
+  <div class="form-horizontal">
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label class="col-sm-3 control-label">订单编号</label>
+        <div class="col-sm-9">
+          <span class="form-control">{{order.orderId}}</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-3 control-label">订单类型</label>
+        <div class="col-sm-9">
+          <span class="form-control">{{order.productType}}</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-3 control-label">订单名称</label>
+        <div class="col-sm-9">
+          <span class="form-control">{{order.productName}}</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-3 control-label">订单金额</label>
+        <div class="col-sm-9">
+          <span class="form-control">{{order.moneyAmount}}</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-3 control-label">购买人</label>
+        <div class="col-sm-9">
+      <span class="form-control">{{order.user.username}}</span>
+    </div>
+      </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label"></label>
+          <div class="col-sm-9">
+            <a href="/list/{{order.typeNameFlag}}"><button class="btn btn-info" type="button"> 返回列表</button></a>            
+          </div>
+        </div>      
+    </div>
+    <div class="col-sm-6">
+      {{#if isEditable}}
+      <div class="form-group">
+          <label class="col-sm-3 control-label">收货人姓名</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control receiver" value="{{order.addressInfo.receiver}}">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label">收货人地址</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control address" value="{{order.addressInfo.address}}">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label">电话</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control phone" value="{{order.addressInfo.phone}}">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label">邮编</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control zipcode" value="{{order.addressInfo.zipcode}}">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label">下单时间</label>
+          <div class="col-sm-9">
+            <span class="form-control">{{order.createTimeL}}</span>
+          </div>
+        </div>
+      {{else}}
+        <div class="form-group">
+          <label class="col-sm-3 control-label">收货人姓名</label>
+          <div class="col-sm-9">
+            <span class="form-control">{{order.addressInfo.receiver}}</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label">收货人地址</label>
+          <div class="col-sm-9">
+            <span class="form-control">{{order.addressInfo.address}}</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label">电话</label>
+          <div class="col-sm-9">
+            <span class="form-control">{{order.addressInfo.phone}}</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label">邮编</label>
+          <div class="col-sm-9">
+            <span class="form-control">{{order.addressInfo.zipcode}}</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label">下单时间</label>
+          <div class="col-sm-9">
+            <span class="form-control">{{order.createTimeL}}</span>
+          </div>
+        </div>
+      {{/if}}  
+
+      <div class="form-group">
+          <div class="center">
+            <button id="mainBtn" class="btn {{btnClass}}" type="button">
+            {{#if isEditable}}
+               <i class="fa fa-save infoL" data-orderid={{order.orderId}} data-relationid="{{order.relationId}}"></i>保存编辑
+              {{else}}
+               <i class="fa fa-pencil-square-o infoL" data-orderid={{order.orderId}} data-relationid="{{order.relationId}}"></i>编辑资料
+            {{/if}}
+            </button>
+          </div>
+     </div> 
+
+    </div>
+  </div>
+
+</template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

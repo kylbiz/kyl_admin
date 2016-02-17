@@ -1,0 +1,364 @@
+<template name="RegistrationInfos">    
+  {{#content title="公司注册"}}
+  <div class="row">
+    <div class="col-md-12">       
+      {{#boxTemplate title="公司注册信息"}}
+      {{> registrationInfoLists }}
+      <button class="btn btn-primary" data-toggle="modal" data-target="#addRegistrationList" >新增公司注册</button>
+      {{/boxTemplate}}
+    </div>
+  </div>    
+  {{/content}}  
+  {{> processTpl}}
+</template>
+
+<template name="registrationInfoLists">
+  {{> ReactiveDatatable tableData=registrationListsData options=optionsObject }}
+  <div>
+    {{> datetime }}
+  </div>
+  <!-- delete registration modal -->
+  <div class="modal fade" id="deleteRegistration" tabindex="-1" role="dialog" aria-labelledby="deleteRegiatrationLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="deleteRegiatrationLabel">确认删除公司注册信息</h4>
+        </div>
+        <div class="modal-body form-horizontal">
+          <div class="form-group">
+            <label class="col-sm-3 control-label">产品ID</label>
+            <div class="col-sm-9">
+              <span class="form-control deleteRegistrationId"></span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">名称</label>
+            <div class="col-sm-9">
+              <span class="form-control deleteRegistrationName"></span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">代码</label>
+            <div class="col-sm-9">
+              <span class="form-control deleteRegistrationType"></span>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+          <button type="button" class="btn btn-danger deleteregistrationconfirm">删除</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal fade" id="addRegistrationList" tabindex="-1" role="dialog" aria-labelledby="addRegistrationListLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="addRegistrationListLabel">新增公司注册信息</h4>
+        </div>
+        <div class="modal-body form-horizontal">
+          <div class="form-group">
+            <label class="col-sm-3 control-label">名称</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control addRegistrationName">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">代码</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control addRegistrationType">
+            </div>
+          </div>
+        </div>
+        <div class="alert alert-error"  role="alert" id="addReError" style="display:none;text-align:center;"></div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+          <button type="button" class="btn btn-success addregistrationconfirm">提交</button>
+        </div>
+      </div>
+    </div>
+  </div>   
+
+</template> 
+
+<template name="RegistrationManageView">
+  {{#content managerTitle="公司注册" managerType="registration"}}
+  <div class="row">
+    <div class="col-md-12">
+      {{#boxTemplate title="产品信息"}}
+      {{> registrationManageDetail }} 
+      {{/boxTemplate}}
+    </div>
+  </div>
+  {{/content}}
+</template>
+
+<template name="registrationManageDetail">
+  <div class="form-horizontal">
+    <div class="col-sm-12">
+      {{#if isEditable}}
+      <div class="form-group">
+        <label class="col-sm-3 control-label">产品名称</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control registrationName" value="{{registration.name}}">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-3 control-label">产品名称英文代码</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control registrationType" value="{{registration.type}}">
+        </div>
+      </div>
+      <div class="alert alert-error"  role="alert" id="mainError" style="display:none;text-align:center;"></div>
+      <div class="alert alert-success" role="alert" id="mainSuccess" style="display:none;text-align:center;"></div>
+      <div class="form-group">
+        <div class="center">
+          <button id="registrationMain" class="btn btn-info" type="button">
+            <i class="fa fa-save"></i>保存编辑
+          </button>
+        </div>
+      </div>
+      <div class="separator"></div>   
+      <div>
+        产品区域信息
+      </div>
+      <div>
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <td>区域</td>
+              <td>价格</td>
+              <td>备注信息</td>
+              <td>操作</td>
+            </tr>              
+          </thead>
+          <tbody>
+            {{#each registration.services}}
+            <tr>
+              <td>{{zone}}</td>
+              <td>{{payment}}</td>
+              <td>{{message}}</td>
+              <td>
+                <button class="btn btn-info editZoneBtn" data-zone="{{zone}}" data-payment="{{payment}}" data-message="{{message}}" data-toggle="modal" data-target="#editZone" >编辑</button>
+                <button class="btn btn-warnning deleteZoneBtn" data-zone="{{zone}}" data-payment="{{payment}}" data-message="{{message}}"  data-toggle="modal" data-target="#deleteZone">删除</button>
+              </td>
+            </tr>              
+            {{/each}}          
+          </tbody> 
+        </table>          
+      </div>
+      <div class="form-group">
+        <div class="center">
+          <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#addZone">
+            <i class="fa fa-save infoL"></i>增加区域
+          </button>
+          <button class="btn btn-success changebtn" type="button">
+            <i class="fa fa-plane infoL"></i>返回产品
+          </button>
+        </div>
+      </div> 
+      {{else}}
+      <div class="form-group">
+        <label class="col-sm-3 control-label">产品名称</label>
+        <div class="col-sm-9">
+          <span class="form-control">{{registration.name}}</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-3 control-label">产品名称英文代码</label>
+        <div class="col-sm-9">
+          <span class="form-control">{{registration.type}}</span>
+        </div>
+      </div>
+      <div class="separator"></div>   
+      <div>
+        产品区域信息
+      </div>
+      <div>
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <td>区域</td>
+              <td>价格</td>
+              <td>备注信息</td>
+            </tr>              
+          </thead>
+          <tbody>
+            {{#each registration.services}}
+            <tr>
+              <td>{{zone}}</td>
+              <td>{{payment}}</td>
+              <td>{{message}}</td>
+            </tr>              
+            {{/each}}          
+          </tbody> 
+        </table>          
+      </div>    
+      <div class="form-group">
+        <div class="center">
+          <button class="btn btn-info edit-btn changebtn" >
+            <i class="fa fa-pencil-square-o infoL"></i>编辑资料
+          </button>
+        </div>
+      </div> 
+      {{/if}}    
+    </div>
+  </div>
+
+  <!-- add zone information modal -->
+  <div class="modal fade" id="addZone" tabindex="-1" role="dialog" aria-labelledby="addZoneLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="addZoneLabel">添加公司注册区域信息</h4>
+        </div>
+        <form>
+          <div class="modal-body form-horizontal">
+            <div class="form-group">
+              <label class="col-sm-3 control-label">区域</label>
+              <div class="col-sm-9">
+                <select class="form-control addZoneZone">
+                  <option value="全区">全区</option>
+                  <option value="黄浦">黄浦</option>
+                  <option value="徐汇">徐汇</option>
+                  <option value="长宁">长宁</option>
+                  <option value="静安">静安</option>
+                  <option value="普陀">普陀</option>
+                  <option value="虹口">虹口</option>
+                  <option value="杨浦">杨浦</option>
+                  <option value="闵行">闵行</option>
+                  <option value="宝山">宝山</option>
+                  <option value="嘉定">嘉定</option>
+                  <option value="浦东">浦东</option>
+                  <option value="金山">金山</option>
+                  <option value="松江">松江</option>
+                  <option value="青浦">青浦</option>
+                  <option value="奉贤">奉贤</option>
+                  <option value="崇明">崇明</option> 
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">价格</label>
+              <div class="col-sm-9">
+                <input type="text" id="addZonePayment" class="form-control">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">备注信息</label>
+              <div class="col-sm-9">
+                <textarea id="addZoneMessage" cols="30" rows="3" class="form-control"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="alert alert-error"  role="alert" id="addzoneerror" style="display:none;text-align:center;"></div>
+          <div class="alert alert-success" role="alert" id="addzonesuccess" style="display:none;text-align:center;"></div>
+        </form>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+          <button type="button" class="btn btn-primary addzonesave">提交</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- delete zone Modal -->
+  <div class="modal fade" id="deleteZone" tabindex="-1" role="dialog" aria-labelledby="deletezonelabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="deletezonelabel">确认删除区域信息</h4>
+        </div>
+        <div class="modal-body form-horizontal">
+
+          <div class="form-group">
+            <label class="col-sm-3 control-label">区域</label>
+            <div class="col-sm-9">
+              <span class="form-control deletezonezone"></span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">价格</label>
+            <div class="col-sm-9">
+              <span class="form-control deletezonepayment"></span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">备注信息</label>
+            <div class="col-sm-9">
+              <span class="form-control deletezonemessage"></span>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+          <button type="button" class="btn btn-warnning deleteconfirm">删除</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- edit zone -->
+  <div class="modal fade" id="editZone" tabindex="-1" role="dialog" aria-labelledby="addZoneLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="addZoneLabel">编辑公司注册区域信息</h4>
+        </div>
+        <form>
+          <div class="modal-body form-horizontal">
+            <div class="form-group">
+              <label class="col-sm-3 control-label">区域</label>
+              <div class="col-sm-9">
+                <select class="form-control editzonezone">
+                  <option value="全区">全区</option>
+                  <option value="黄浦">黄浦</option>
+                  <option value="徐汇">徐汇</option>
+                  <option value="长宁">长宁</option>
+                  <option value="静安">静安</option>
+                  <option value="普陀">普陀</option>
+                  <option value="虹口">虹口</option>
+                  <option value="杨浦">杨浦</option>
+                  <option value="闵行">闵行</option>
+                  <option value="宝山">宝山</option>
+                  <option value="嘉定">嘉定</option>
+                  <option value="浦东">浦东</option>
+                  <option value="金山">金山</option>
+                  <option value="松江">松江</option>
+                  <option value="青浦">青浦</option>
+                  <option value="奉贤">奉贤</option>
+                  <option value="崇明">崇明</option> 
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">价格</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control editzonepayment">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">备注信息</label>
+              <div class="col-sm-9">
+                <textarea cols="30" rows="3" class="form-control editzonemessage"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="alert alert-error"  role="alert" id="editzoneerror" style="display:none;text-align:center;"></div>
+          <div class="alert alert-success" role="alert" id="editzonesuccess" style="display:none;text-align:center;"></div>
+        </form>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+          <button type="button" class="btn btn-primary editzoneconfirm">提交</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</template>
