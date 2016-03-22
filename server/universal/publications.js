@@ -107,25 +107,25 @@ Meteor.publish('IndustryLists', function() {
   return Business1.find({});
 });
 
-// Meteor.publish("getwxorders", function() {
-//   return Orders.find({
-//     host: 'KYLWECHAT'
-//   }, {
-//     fields: {
-//       order_id: 1,
-//       order_status: 1,
-//       product_name: 1,
-//       product_price: 1,
-//       order_create_time: 1,
-//       updateTime: 1,
-//       host: 1
-//     }
-//   });
-// })
+Meteor.publish("getwxorders", function() {
+  return Orders.find({
+    host: 'KYLWECHAT'
+  }, {
+    fields: {
+      order_id: 1,
+      order_status: 1,
+      product_name: 1,
+      product_price: 1,
+      order_create_time: 1,
+      updateTime: 1,
+      host: 1
+    }
+  });
+})
 
-// Meteor.publish("getwxorder", function(orderId) {
-//   return Orders.find({host: 'KYLWECHAT', orderId: orderId});
-// })
+Meteor.publish("getwxorder", function(order_id) {
+  return Orders.find({host: 'KYLWECHAT', order_id: order_id});
+})
 
 // Meteor.publish("getyzorders", function() {
 //   return Orders.find({

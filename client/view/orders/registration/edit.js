@@ -263,7 +263,12 @@ Template.classify.events({
 
 Template.itemR.helpers({
   "contents": function() {
-    return Session.get("contents");
+    var contentsStr = Session.get("contents");
+    if(typeof(contentsStr) === "string") {
+      return contentsStr.split(",");
+    } else {
+      return contentsStr;
+    }
   }
 })
 
@@ -333,7 +338,6 @@ Template.editorFactory.events({
     var financialStaffPhone = $("#financialStaffPhone").val() || "";
     var financialStaffEmail = $("#financialStaffEmail").val() || "";    
 
-    console.log
     if(orderId && liaisonsName && IdReg.test(liaisonsId) && PhoneReg.test(liaisonsPhone) && financialStaffName && IdReg.test(financialStaffId) && PhoneReg.test(financialStaffPhone) && EmailReg.test(liaisonsEmail) && EmailReg.test(financialStaffEmail) && financialStaffId !== liaisonsId) {
       var options = {
         orderId: orderId,
@@ -354,20 +358,3 @@ Template.editorFactory.events({
     }
   }
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
