@@ -24,7 +24,7 @@ Meteor.publish('getAllOrders', function() {
       }
     }, {
       sort: {orderId: -1}
-    });    
+    });
   } else {
     return Orders.find({host: /KYLPC|KYLWX/}, {
       sort: {orderId: -1}
@@ -73,7 +73,7 @@ Meteor.publish('getOrderTypeLists', function(typeNameFlag) {
     }, {
       sort: {orderId: -1}
     });
-  }  
+  }
 
   // return Orders.find({typeNameFlag: typeNameFlag, host: /KYLPC|KYLWX/});
 })
@@ -159,7 +159,7 @@ Meteor.publish("customers", function () {
     var users = Roles.getUsersInRole('customer', '',{fields: {emails: 1, profile: 1, roles: 1, createdAt: 1, username: 1}});
     // var users = Meteor.users.find({"roles": {$all: ["customer"]}})
     return users;
-  } 
+  }
 
   this.stop();
   return;
@@ -172,7 +172,7 @@ Meteor.publish("getCustomer", function(userId) {
   if (Roles.userIsInRole(user, ['admin'])) {
     var users = Meteor.users.find({_id: userId});
     return users;
-  } 
+  }
 
   this.stop();
   return;
@@ -186,7 +186,7 @@ Meteor.publish("admins", function () {
   if (Roles.userIsInRole(user, ['manageusers'])) {
     var users = Roles.getUsersInRole('admin', '',{fields: {emails: 1, profile: 1, roles: 1, createdAt: 1, username: 1}});
     return users;
-  } 
+  }
 
   this.stop();
   return;
@@ -199,6 +199,18 @@ Meteor.publish('GetHandleResults', function(uuid) {
 
 Meteor.publish('getDocNum', function(userId) {
   return DocNum.find({userId: userId});
+})
+
+// 获取微信小店的数据
+Meteor.publish('getWxShopInfo', function (cond) {
+  var userId = this.userId;
+  if (userId && Roles.userIsInRole(userId, ['editgoods'])) {
+    cond = cond || {};
+    return WeChatShopGoods.find(cond);
+  } else {
+    this.stop();
+    return;
+  }
 })
 
 

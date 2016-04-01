@@ -1,14 +1,14 @@
-<template name="RegistrationInfos">    
+<template name="RegistrationInfos">
   {{#content title="公司注册"}}
   <div class="row">
-    <div class="col-md-12">       
+    <div class="col-md-12">
       {{#boxTemplate title="公司注册信息"}}
       {{> registrationInfoLists }}
       <button class="btn btn-primary" data-toggle="modal" data-target="#addRegistrationList" >新增公司注册</button>
       {{/boxTemplate}}
     </div>
-  </div>    
-  {{/content}}  
+  </div>
+  {{/content}}
   {{> processTpl}}
 </template>
 
@@ -52,7 +52,7 @@
       </div>
     </div>
   </div>
-  
+
   <div class="modal fade" id="addRegistrationList" tabindex="-1" role="dialog" aria-labelledby="addRegistrationListLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -81,16 +81,15 @@
         </div>
       </div>
     </div>
-  </div>   
-
-</template> 
+  </div>
+</template>
 
 <template name="RegistrationManageView">
   {{#content managerTitle="公司注册" managerType="registration"}}
   <div class="row">
     <div class="col-md-12">
       {{#boxTemplate title="产品信息"}}
-      {{> registrationManageDetail }} 
+      {{> registrationManageDetail }}
       {{/boxTemplate}}
     </div>
   </div>
@@ -122,7 +121,7 @@
           </button>
         </div>
       </div>
-      <div class="separator"></div>   
+      <div class="separator"></div>
       <div>
         产品区域信息
       </div>
@@ -134,7 +133,7 @@
               <td>价格</td>
               <td>备注信息</td>
               <td>操作</td>
-            </tr>              
+            </tr>
           </thead>
           <tbody>
             {{#each registration.services}}
@@ -146,10 +145,10 @@
                 <button class="btn btn-info editZoneBtn" data-zone="{{zone}}" data-payment="{{payment}}" data-message="{{message}}" data-toggle="modal" data-target="#editZone" >编辑</button>
                 <button class="btn btn-warnning deleteZoneBtn" data-zone="{{zone}}" data-payment="{{payment}}" data-message="{{message}}"  data-toggle="modal" data-target="#deleteZone">删除</button>
               </td>
-            </tr>              
-            {{/each}}          
-          </tbody> 
-        </table>          
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
       </div>
       <div class="form-group">
         <div class="center">
@@ -160,7 +159,7 @@
             <i class="fa fa-plane infoL"></i>返回产品
           </button>
         </div>
-      </div> 
+      </div>
       {{else}}
       <div class="form-group">
         <label class="col-sm-3 control-label">产品名称</label>
@@ -174,7 +173,7 @@
           <span class="form-control">{{registration.type}}</span>
         </div>
       </div>
-      <div class="separator"></div>   
+      <div class="separator"></div>
       <div>
         产品区域信息
       </div>
@@ -185,7 +184,7 @@
               <td>区域</td>
               <td>价格</td>
               <td>备注信息</td>
-            </tr>              
+            </tr>
           </thead>
           <tbody>
             {{#each registration.services}}
@@ -193,19 +192,19 @@
               <td>{{zone}}</td>
               <td>{{payment}}</td>
               <td>{{message}}</td>
-            </tr>              
-            {{/each}}          
-          </tbody> 
-        </table>          
-      </div>    
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
       <div class="form-group">
         <div class="center">
           <button class="btn btn-info edit-btn changebtn" >
             <i class="fa fa-pencil-square-o infoL"></i>编辑资料
           </button>
         </div>
-      </div> 
-      {{/if}}    
+      </div>
+      {{/if}}
     </div>
   </div>
 
@@ -239,7 +238,7 @@
                   <option value="松江">松江</option>
                   <option value="青浦">青浦</option>
                   <option value="奉贤">奉贤</option>
-                  <option value="崇明">崇明</option> 
+                  <option value="崇明">崇明</option>
                 </select>
               </div>
             </div>
@@ -333,7 +332,7 @@
                   <option value="松江">松江</option>
                   <option value="青浦">青浦</option>
                   <option value="奉贤">奉贤</option>
-                  <option value="崇明">崇明</option> 
+                  <option value="崇明">崇明</option>
                 </select>
               </div>
             </div>
@@ -360,5 +359,4 @@
       </div>
     </div>
   </div>
-
 </template>

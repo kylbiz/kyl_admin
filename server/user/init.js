@@ -1,10 +1,10 @@
 var users = [
     {
-      name: "kyladmin", 
-      email:"cc.cui@kyl.biz",
+      name: "kyladmin",
+      email:"air.cui@kyl.biz",
       password: 'kyl123',
       phone: 122222334,
-      roles: ['admin', 'manageusers', 'vieworders', 'editorders']
+      roles: ['admin', 'manageusers', 'vieworders', 'editorders', 'editgoods']
     }
 ];
 
@@ -28,7 +28,7 @@ if (Meteor.users.find().count() == 0 || Roles.getUsersInRole('admin').count() ==
             console.log(user.name, 'add roles', user.roles);
             Roles.addUsersToRoles(userId, user.roles);
         }
-  });    
+  });
 
-    // Roles.createRole('customer');  
+    // Roles.createRole('customer');
 }

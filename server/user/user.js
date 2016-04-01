@@ -5,10 +5,10 @@ Accounts.validateNewUser(function (user) {
   if (Meteor.users.find().count() == 0 || Roles.getUsersInRole('admin').count() == 0) {
     return true;
   }
-  
+
   var loggedInUser = Meteor.user();
   if (Roles.userIsInRole(loggedInUser, ['admin','manageusers'])) {
-    // NOTE: This example assumes the user is not using groups. 
+    // NOTE: This example assumes the user is not using groups.
     console.log("create user true");
     return true;
   }
@@ -19,6 +19,14 @@ Accounts.validateNewUser(function (user) {
 
 // 操作用户的方法
 Meteor.methods({
+  checkPermission: function (permission) {
+    var loggedInUser = Meteor.user();
+    if (permission &&  loggedInUser && Roles.userIsInRole(loggedInUser, permission)) {
+      return true;
+    }
+
+    return false;
+  },
   checkUserHandlePermission: function () {
     var loggedInUser = Meteor.user();
     if (!loggedInUser ||
@@ -30,7 +38,7 @@ Meteor.methods({
 },
    /**
     * check user permission for login this platform
-    * @return {Boolean} true if permit 
+    * @return {Boolean} true if permit
     */
     checkLoginPermission: function(username) {
       var user = Meteor.users.findOne({"username": username});
@@ -43,7 +51,7 @@ Meteor.methods({
 
   /**
    * delete a user from a specific group
-   * 
+   *
    * @method deleteUser
    * @param {String} targetUserId _id of user to delete
    * @param {String} group Company to update permissions for
@@ -52,7 +60,7 @@ Meteor.methods({
     var loggedInUser = Meteor.user()
 
     if (!loggedInUser ||
-      !Roles.userIsInRole(loggedInUser, 
+      !Roles.userIsInRole(loggedInUser,
         ['manageusers'])) {
       throw new Meteor.Error(403, "Access denied")
   }
@@ -75,7 +83,7 @@ Meteor.methods({
     var loggedInUser = Meteor.user();
     if (!user || !loggedInUser || !Roles.userIsInRole(loggedInUser, ['manageusers'])) {
       throw new Meteor.Error(403, "Access denied");
-    } 
+    }
 
     var info = user.info;
     var userId = Accounts.createUser({
@@ -105,10 +113,10 @@ Meteor.methods({
         var loggedInUser = Meteor.user();
 
         if (!user || !loggedInUser ||
-          !Roles.userIsInRole(loggedInUser, 
+          !Roles.userIsInRole(loggedInUser,
             ['manageusers'])) {
           throw new Meteor.Error(403, "Access denied");
-      }    
+      }
 
       var roles = user.roles;
       Roles.setUserRoles(targetUserId, roles);
@@ -162,11 +170,11 @@ Meteor.methods({
     var loggedInUser = Meteor.user()
 
     if (!loggedInUser ||
-      !Roles.userIsInRole(loggedInUser, 
+      !Roles.userIsInRole(loggedInUser,
         ['manage-users'], group)) {
       throw new Meteor.Error(403, "Access denied!")
   }
-  if (roles || group) {      
+  if (roles || group) {
     Roles.setUserRoles(targetUserId, roles, group)
   }
 },

@@ -1,0 +1,120 @@
+<template name="WXShopList">
+  {{#content title="微信小店"}}
+  <div class="row">
+    <div class="col-md-12">
+      {{#boxTemplate title="微信小店商品"}}
+        {{> wxGoodList }}
+        <button class="btn btn-primary" data-toggle="modal" data-target="#addRegistrationList" >新增商品</button>
+        <button class="btn btn-primary" id="updateListBtn">更新商品列表</button>
+      {{/boxTemplate}}
+    </div>
+  </div>
+  {{/content}}
+  {{> processTpl}}
+</template>
+
+
+<template name="wxGoodList">
+  {{> ReactiveDatatable tableData=goodInfo options=tableOpt }}
+  <div>
+    {{> datetime }}
+  </div>
+  <!-- delete registration modal -->
+  <div class="modal fade" id="deleteWXGoodBtn" tabindex="-1" role="dialog" aria-labelledby="deleteWXGoodLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="deleteWXGoodLabel">确认删除该商品</h4>
+        </div>
+        <div class="modal-body form-horizontal">
+          <div class="form-group">
+            <label class="col-sm-3 control-label">商品序列号</label>
+            <div class="col-sm-9">
+              <span class="form-control deleteWXGoodBtnId"></span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">名称</label>
+            <div class="col-sm-9">
+              <span class="form-control deleteWXGoodBtnName"></span>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+          <button type="button" class="btn btn-danger deleteWXGoodBtn">删除</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="addRegistrationList" tabindex="-1" role="dialog" aria-labelledby="addRegistrationListLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="addRegistrationListLabel">新增公司注册信息</h4>
+        </div>
+        <div class="modal-body form-horizontal">
+          <div class="form-group">
+            <label class="col-sm-3 control-label">名称</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control addRegistrationName">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">代码</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control addRegistrationType">
+            </div>
+          </div>
+        </div>
+        <div class="alert alert-error"  role="alert" id="addReError" style="display:none;text-align:center;"></div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+          <button type="button" class="btn btn-success addregistrationconfirm">提交</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<!-- 微信小店的编辑页 -->
+<template name="WXShopGoodView">
+  {{#content managerTitle="微信小店商品" managerType="wxshop"}}
+    <div class="row">
+      <div class="col-md-12">
+        {{#boxTemplate title="产品信息"}}
+        {{> wxGoodDetail}}
+        {{/boxTemplate}}
+      </div>
+    </div>
+  {{/content}}
+</template>
+
+
+<template name="wxGoodDetail">
+  <div class="form-horizontal">
+    <div class="col-sm-12">
+      {{#each inputData}}
+        {{> UI.dynamic template="wxGoodInput" data=this }}
+      {{/each}}
+    </div>
+  </div>
+</template>
+
+<template name="wxGoodInput">
+  <div class="form-group">
+    <label class="col-sm-3 control-label">{{name}}</label>
+    <div class="col-sm-9">
+      <input type="text" class="form-control" id="{{id}}" value="{{value}}">
+    </div>
+  </div>
+</template>
+
+
+<template name="wxGoodOpt">
+  <a href="{{pathFor route='WXShopGoodView' data=idObj}}" class='btn btn-primary'>详细信息</a>
+  <button type='button' class='btn btn-danger deleteWXGoodBtn' data-toggle='modal' data-target='#deleteWXGoodBtn' data-name={{name}} data-id={{_id}} >删除</button>
+</template>

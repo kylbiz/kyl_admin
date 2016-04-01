@@ -17,16 +17,19 @@ HandleResults = new Meteor.Collection("HandleResults");
 
 DocNum = new Meteor.Collection("DocNum");
 
+WeChatInfo = new Meteor.Collection('wechatinfo');
 
-Date.prototype.Format = function (fmt) { //author: meizz 
+WeChatShopGoods = new Meteor.Collection('WeChatShopGoods');
+
+Date.prototype.Format = function (fmt) { //author: meizz
   var o = {
-        "M+": this.getMonth() + 1, //月份 
-        "d+": this.getDate(), //日 
-        "h+": this.getHours(), //小时 
-        "m+": this.getMinutes(), //分 
-        "s+": this.getSeconds(), //秒 
-        "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
-        "S": this.getMilliseconds() //毫秒 
+        "M+": this.getMonth() + 1, //月份
+        "d+": this.getDate(), //日
+        "h+": this.getHours(), //小时
+        "m+": this.getMinutes(), //分
+        "s+": this.getSeconds(), //秒
+        "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+        "S": this.getMilliseconds() //毫秒
       };
       if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
       for (var k in o)
@@ -43,7 +46,7 @@ Orders.helpers({
       var month = createTimeL.getMonth() + 1;
       var date= createTimeL.getDate();
       var hours = createTimeL.getHours();
-      var minutes = createTimeL.getMinutes(); 
+      var minutes = createTimeL.getMinutes();
       var createTime =  year+ '-' +  month +'-' + date + ' ' + hours + ':' + minutes;
       return createTime;
       // return moment(this.createTime).format("YYYY年MM月DD日 H:mm");
@@ -68,7 +71,7 @@ Orders.helpers({
     if(this.companyName && this.companyName.mainName) {
       var mainName = this.companyName.mainName;
       var industrySmall = this.industrySmall;
-      return mainName + '（上海）' + industrySmall + '有限责任公司';    
+      return mainName + '（上海）' + industrySmall + '有限责任公司';
     }
   },
   alternativeName: function() {
@@ -85,9 +88,9 @@ Orders.helpers({
       };
       if(this.companyName.alternativeName4) {
         companyName += ',' + this.companyName.alternativeName4;
-      }      
+      }
       return companyName;
-    }    
+    }
   },
   displayHolders: function() {
     if(this.holders) {
@@ -155,7 +158,7 @@ Orders.helpers({
       return this.addressInfo.phone;
     } else  {
       return "";
-    }    
+    }
   },
   "orderHost": function() {
     if(this.host) {
@@ -182,7 +185,7 @@ Orders.helpers({
        }
     } else {
       return "";
-    }    
+    }
   },
   "holdernum": function() {
     if(this.holders) {
