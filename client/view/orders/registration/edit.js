@@ -9,7 +9,7 @@ Template.editorFactory.onCreated(function(){
 
 Template.editorFactory_partial.onCreated(function() {
     Session.set("addressEdit", false);
-})
+});
 
 Template.editorFactory_partial.events({
   "click .editAddress": function(e, template) {
@@ -336,8 +336,11 @@ Template.editorFactory.events({
     var financialStaffName = $("#financialStaffName").val() || "";
     var financialStaffId = $("#financialStaffId").val() || "";
     var financialStaffPhone = $("#financialStaffPhone").val() || "";
-    var financialStaffEmail = $("#financialStaffEmail").val() || "";    
-
+    var financialStaffEmail = $("#financialStaffEmail").val() || ""; 
+    
+    //财务负责方式
+    var financialAgent =$("#agentSelect").val().trim()||"";
+    
     if(orderId && liaisonsName && IdReg.test(liaisonsId) && PhoneReg.test(liaisonsPhone) && financialStaffName && IdReg.test(financialStaffId) && PhoneReg.test(financialStaffPhone) && EmailReg.test(liaisonsEmail) && EmailReg.test(financialStaffEmail) && financialStaffId !== liaisonsId) {
       var options = {
         orderId: orderId,
@@ -351,10 +354,43 @@ Template.editorFactory.events({
           financialStaffName: financialStaffName,
           financialStaffId: financialStaffId,
           financialStaffPhone:  financialStaffPhone,
-          financialStaffEmail: financialStaffEmail
+          financialStaffEmail: financialStaffEmail,
+          financialAgent: financialAgent
         }
       };
       Meteor.call('CompayContractorHandle', options);    
     }
   }
 });
+
+//财务负责人编辑状态
+Template.editorFactory.events({
+  "change #agentSelect":function(e,template){
+    var self = $(e.currentTarget);
+    var current = self.val();
+    console.log(current);
+    if(current==1){
+      Session.set("editAgent",true);
+    }
+    else if(current==2){
+      Session.set("editAgent",false);
+    }
+  }
+});
+
+//财务负责人编辑状态
+Template.editorFactory_partial.onRendered(function(){  
+  Session.set("editAgent",Orders.findOne().contractor.financialStaff.financialAgent);  
+  this.autorun(function(){
+    if(!Session.get("contractorEdit")) {
+      Session.set("editAgent",Orders.findOne().contractor.financialStaff.financialAgent);      
+    }    
+  })  
+});
+
+//财务负责人编辑状态
+Template.editorFactory_partial.helpers({
+  "financialAgent":function(){
+    return Session.get("editAgent");               
+  }
+})

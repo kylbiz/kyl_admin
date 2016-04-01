@@ -32,7 +32,7 @@
           <div class="form-group">
             <label class="col-lg-3 col-md-2 control-label">公司名称</label>
             <div class="col-lg-9 col-md-10">
-              <span class="form-control">
+              <span class="form-control textarea">
                 {{order.companyNameL}}
               </span>
             </div>
@@ -40,7 +40,7 @@
           <div class="form-group">
             <label class="col-lg-3 col-md-2 control-label">备选名称</label>
             <div class="col-lg-9 col-md-10">
-              <span class="form-control">
+              <span class="form-control textarea">
                 {{order.alternativeName}}
               </span>
             </div>
@@ -132,6 +132,11 @@
 
           <div class="separator"></div>
           <div class="form-group">
+            <div class="col-sm-12">
+              <div class="form-title">法人信息</div>
+            </div>
+          </div>          
+          <div class="form-group">
             <label class="col-sm-3 control-label">法人</label>
             <div class="col-sm-3">
               <span class="form-control">
@@ -167,7 +172,11 @@
               </span>
             </div>
           </div>
-
+          <div class="form-group">
+            <div class="col-sm-12">
+              <div class="form-title">监事信息</div>
+            </div>
+          </div>
           <div class="form-group">
             <label class="col-sm-3 control-label">监事</label>
             <div class="col-sm-3">
@@ -182,7 +191,30 @@
               </span>
             </div>
           </div>
-          {{>contact_partial}}
+          <!-- 新增 -->
+          <div class="form-group">
+            <label class="col-sm-3 control-label">监事手机</label>
+            <div class="col-sm-3">
+              <span class="form-control">
+                {{order.supervisor.supervisorPhone}}
+              </span>
+            </div>
+            <label class="col-sm-2 control-label">监事电话</label>
+            <div class="col-sm-4">
+              <span class="form-control">
+                {{order.supervisor.supervisorTel}}
+              </span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 col-md-2 control-label">监事邮箱</label>
+            <div class="col-lg-9 col-md-10">
+              <span class="form-control textarea">
+                {{order.supervisor.supervisorEmail}}
+              </span>
+            </div>
+          </div>          
+          <!-- /新增 -->
           <div class="separator"></div>
           <div class="form-group">
             <div class="center">
@@ -205,6 +237,7 @@
 
        <div class="col-lg-6 col-md-12">
 
+        {{>contact_partial}}
         <div class="box border red">
           <div class="box-title">
             <h4>股东信息</h4>
@@ -344,6 +377,11 @@
 <template name="contact_partial">
  <div class="mini_separator"></div>
  <div class="form-group">
+   <div class="col-sm-12">
+     <div class="form-title">企业联络人</div>
+   </div>
+ </div>
+ <div class="form-group">
   <label class="col-sm-3 control-label">企业联络人</label>
   <div class="col-sm-3">
     <span class="form-control">
@@ -372,25 +410,39 @@
 </div>
 </div>
 <div class="mini_separator"></div>
-<div class="form-group">
-  {{#if order.contractor.financialStaff.financialAgent}}
-    <i>开业啦代理</i>
-  {{else}}
-    <i>自有财务负责人</i>
-  {{/if}}
-  <label class="col-sm-3 control-label">财务负责人</label>
-  <div class="col-sm-3">
-    <span class="form-control">
-      {{order.contractor.financialStaff.financialStaffName}}
-    </span>
+
+{{#if order.contractor.financialStaff.financialAgent}}
+  <div class="form-group">
+    <div class="col-sm-12">
+        <div class="form-title">财务负责人</div>   
+    </div>
   </div>
-  <label class="col-sm-2 control-label">身份证号</label>
-  <div class="col-sm-4">
-    <span class="form-control">
-      {{order.contractor.financialStaff.financialStaffId}}
-    </span>
+  <div class="form-group">
+    <div class="col-sm-12">
+      <span class="form-control">由本方提供办理</span>
+    </div>
   </div>
-</div>
+{{else}}
+  <div class="form-group">
+    <div class="col-sm-12">
+        <div class="form-title">对方指定财务负责人</div>   
+    </div>
+  </div>  
+  <div class="form-group">
+    <label class="col-sm-3 control-label">财务负责人</label>
+    <div class="col-sm-3">
+      <span class="form-control">
+        {{order.contractor.financialStaff.financialStaffName}}
+      </span>
+    </div>
+    <label class="col-sm-2 control-label">身份证号</label>
+    <div class="col-sm-4">
+      <span class="form-control">
+        {{order.contractor.financialStaff.financialStaffId}}
+      </span>
+    </div>
+  </div>  
+{{/if}}
 <div class="form-group">
   <label class="col-sm-3 control-label">手机号</label>
   <div class="col-sm-3">
@@ -406,6 +458,11 @@
  </div>
 </div>
 <div class="mini_separator"></div>
+<div class="form-group">
+  <div class="col-sm-12">
+    <div class="form-title">资料对接人信息</div>
+  </div>
+</div>
 <div class="form-group">
   <label class="col-sm-3 control-label">资料对接人</label>
   <div class="col-sm-3">
@@ -428,6 +485,5 @@
  </span>
 </div>
 </div>
-
-
+<div class="separator"></div>
 </template>

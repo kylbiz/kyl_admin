@@ -55,13 +55,13 @@
               <div class="form-group">
                 <label class="fluid control-label">公司名称</label>
                 <div class="fluid col-sm-12">
-                  <span class="form-control">{{order.companyNameL}}</span>
+                  <span class="form-control textarea">{{order.companyNameL}}</span>
                 </div>
               </div>
               <div class="form-group">
                 <label class="fluid control-label">备选名称</label>
                 <div class="fluid col-sm-12">
-                  <span class="form-control">{{order.alternativeName}}</span>
+                  <span class="form-control textarea">{{order.alternativeName}}</span>
                 </div>
               </div>
               <div class="form-group">
@@ -361,7 +361,7 @@
               </div>
               {{else}}
               <div class="form-group">
-                <label class="fluid control-label">法人姓名</label>
+                <label class="fluid control-label">法人</label>
                 <div class="fluid col-sm-12">
                   <span class="form-control">{{order.legalPerson.legalPersonName}}</span>
                 </div>
@@ -526,6 +526,14 @@
                   </div>                                    
                 </div>
                 <div class="col-sm-6">
+                 {{#if financialAgent}}        
+                   <div class="form-group">
+                    <label class="fluid control-label">财务负责</label>
+                    <div class="fluid col-sm-12">
+                      <span class="form-control">由开业啦代理</span>
+                    </div>                     
+                   </div>         
+                 {{else}} 
                   <div class="form-group">
                     <label class="fluid control-label">财务负责人</label>
                     <div class="fluid col-sm-12">
@@ -549,9 +557,25 @@
                     <div class="fluid col-sm-12">
                       <input class="form-control" id="financialStaffEmail" value="{{order.contractor.financialStaff.financialStaffEmail}}">
                     </div>
-                  </div>                                   
-                </div>
-              </div>
+                  </div> 
+               {{/if}} 
+                  <div class="form-group">
+                    <label class="fluid control-label">负责方式</label>                     
+                    <div class="fluid col-sm-12">
+                      <select name="financialAgent" id="agentSelect" class="form-control">
+                        {{#if financialAgent}}   
+                            <option value="1" selected>开业啦代理</option>
+                            <option value="2">对方指定负责人</option>                       
+                          {{else}}
+                            <option value="1">开业啦代理</option>
+                            <option value="2" selected>对方指定负责人</option>         
+                        {{/if}}
+                      </select>
+                    </div>
+                  </div>                                                                                                                                      
+                </div>              
+              
+              </div>              
               <div class="row">
                 <div class="col-sm-12">
                   <div class="form-group">
@@ -570,7 +594,7 @@
              {{else}}
             <form>       
               <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-6">                            
                   <div class="form-group">
                     <label class="fluid control-label">企业联络人</label>
                     <div class="fluid col-sm-12">
@@ -597,6 +621,14 @@
                   </div>                                    
                 </div>
                 <div class="col-sm-6">
+                 {{#if order.contractor.financialStaff.financialAgent}}        
+                   <div class="form-group">
+                    <label class="fluid control-label">财务负责</label>
+                    <div class="fluid col-sm-12">
+                      <span class="form-control">由开业啦代理</span>
+                    </div>                     
+                   </div>         
+                 {{else}}                       
                   <div class="form-group">
                     <label class="fluid control-label">财务负责人</label>
                     <div class="fluid col-sm-12">
@@ -620,7 +652,8 @@
                     <div class="fluid col-sm-12">
                       <span class="form-control">{{order.contractor.financialStaff.financialStaffEmail}}</span>
                     </div>
-                  </div>                                   
+                  </div> 
+               {{/if}}                                                     
                 </div>
               </div>
               <div class="row">
