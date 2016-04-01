@@ -1,0 +1,42 @@
+# Meteor packages used by this project, one per line.
+# Check this file (and the other files in this directory) into your repository.
+#
+# 'meteor add' and 'meteor remove' will edit this file for you,
+# but you can also edit it by hand.
+
+meteor-base             # Packages every Meteor app needs to have
+mobile-experience       # Packages for a great mobile UX
+mongo                   # The database Meteor supports right now
+blaze-html-templates    # Compile .html files into Meteor Blaze views
+session                 # Client-side reactive dictionary for your app
+jquery                  # Helpful client-side library
+tracker                 # Meteor's client-side reactive programming library
+
+standard-minifiers      # JS/CSS minifiers run for production mode
+es5-shim                # ECMAScript 5 compatibility for older browsers.
+ecmascript              # Enable ECMAScript2015+ syntax in app code
+
+# autopublish             # Publish all data to the clients (for prototyping)
+# insecure                # Allow all DB writes from clients (for prototyping)
+
+
+
+accounts-password            # Password support for accounts
+alanning:roles               # Role-based authorization
+cfs:http-methods             # Adds HTTP.methods RESTful
+dburles:collection-helpers   # Transform your collections with helpers t...
+ephemer:reactive-datatables  # ast and reactive jQuery DataTables using...
+fortawesome:fontawesome      #4.4.0* Font Awesome (official): 500+ scalable ve...
+http                         # 1.1.0* Make HTTP calls to remote servers
+iron:router                  # 1.0.9* Routing specifically designed for Meteor
+jparker:crypto-md5           # 0.1.1  MD5 algorithm for CryptoJS, standard secu...
+less                         # 1.0.14* The dynamic stylesheet language
+meteor-platform              # 1.2.2* Include a standard set of Meteor packages...
+meteorhacks:async            # 1.0.0  Set of async utilities to work with NPM m...
+meteorhacks:npm              # 1.5.0  Use npm modules with your Meteor App
+mfactory:admin-lte           # 0.0.2  AdminLTE dashboard theme
+momentjs:moment              # 2.10.6* Moment.js (official): parse, validate, m...
+# npm-container                # 1.2.0+ Contains all your npm dependencies
+
+
+npm-container
