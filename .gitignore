@@ -1,6 +1,6 @@
 # meteor package
 .meteor/meteorite
-packages
+packages/
 
 # Mac .DS_Store package
 .DS_Store
