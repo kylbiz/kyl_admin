@@ -19,7 +19,16 @@ var orderlistsOptions = {
   },  
   {
     title: '产品名称',
-    data: 'productName'
+    data: 'productName',
+    render: function(cellData, renderType,currentRow) {
+      if(currentRow.host=="KYLWX") {
+        return currentRow.servicesNameList[0].label;
+      }
+      else {
+        //console.log(cellData);
+        return cellData;
+      }
+    }
   },
   {
     title: '金额',
