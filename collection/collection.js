@@ -57,7 +57,8 @@ Orders.helpers({
   productName: function() {
     var productName = '';
     if ( (this.host == 'KYLWAP') || (this.host == 'KYLWX') ) {
-      productName = this.servicesNameList[0].label || this.servicesNameList[0].name;
+      var productInfo = this.servicesNameList[0];
+      productName = productInfo.zhDes || productInfo.label || productInfo.name;
     } else {
       productName = this.servicesNameList[0].name;
     }
