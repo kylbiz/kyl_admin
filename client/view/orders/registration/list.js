@@ -2,7 +2,7 @@ var orderlistsOptions = {
   columns: [
   {
     title: '订单编号',
-    data: 'orderId', 
+    data: 'orderId',
     className: 'orderId'
   },
   {
@@ -13,23 +13,14 @@ var orderlistsOptions = {
     title: '收货人',
     className: 'handle-min',
     data: "receiverName"
-  },  
+  },
   {
     title: '收货电话',
     data: "receiverPhone"
-  }, 
+  },
   {
     title: '产品名称',
-    data: 'productName',
-    render: function(cellData, renderType,currentRow) {
-      if(currentRow.host=="KYLWX") {
-        return currentRow.servicesNameList[0].label;
-      }
-      else {
-        //console.log(cellData);
-        return cellData;
-      }
-    }    
+    data: 'productName'
   },
   {
     title: '金额',
@@ -43,7 +34,7 @@ var orderlistsOptions = {
   {
     title: '下单时间',
     data: 'createTimeL'
-  },  
+  },
   {
     title: "支付状态",
     className: 'handle',
@@ -82,7 +73,7 @@ var orderlistsOptions = {
       return "领取企业代码证"
 
   }
-},      
+},
 {
  title: "设置状态",
  className: 'handle',
@@ -90,15 +81,15 @@ var orderlistsOptions = {
     if(currentRow.hasOwnProperty("productProgress") && currentRow.hasOwnProperty("relationId")) {
       var status = currentRow.productProgress.status;
       var relationId = currentRow.relationId;
-      var html="<a href='#' class='set' data-toggle='modal' data-target='#processTpl' data-status='" 
+      var html="<a href='#' class='set' data-toggle='modal' data-target='#processTpl' data-status='"
       + status + "' "
-      + "data-relationid='" + relationId + "' "  
-      + ">设置</a>";  
+      + "data-relationid='" + relationId + "' "
+      + ">设置</a>";
       return html;
     } else {
       return "";
-    } 
-  }      
+    }
+  }
 },
 {
   title: "操作",
@@ -107,24 +98,24 @@ var orderlistsOptions = {
     if(currentRow.hasOwnProperty("payed") && (currentRow.payed === true || currentRow.payed === "true")) {
       var orderId = currentRow.orderId;
       var url='/'+currentRow.typeNameFlag+'/'+orderId;
-      var html = "<a href="+url+">详细信息</a>";      
+      var html = "<a href="+url+">详细信息</a>";
       return html;
     } else {
       return "";
     }
   }
-}      
+}
 ],
   pageLength: 10,
   lengthMenu: [10, 15, 20,25, 50]
 }
 
-var reactiveFun = function () { 
+var reactiveFun = function () {
   var orders = Orders.find({typeNameFlag: 'registration'});
   if(orders.count() === 0) {
     return [];
   } else {
-    return orders.fetch(); 
+    return orders.fetch();
   }
 };
 
@@ -132,12 +123,12 @@ Template.registrationListsView.helpers({
   orderlistData: function () {
     return reactiveFun;
   },
-  optionsObject: orderlistsOptions 
+  optionsObject: orderlistsOptions
 });
 
 Template.registrationListsView.onRendered(function(){
   $("#classify").change(function(){
-    var value=$(this).val();     
+    var value=$(this).val();
     $("table.table").DataTable().columns(9).search(value).draw();
   });
 });

@@ -2,21 +2,21 @@ var orderlistsOptions = {
   columns: [
   {
     title: '订单编号',
-    data: 'orderId', 
+    data: 'orderId',
     className: 'orderId'
   },
   {
     title: '下单用户',
     data: "username"
-  },      
+  },
   {
     title: '收货人',
     data: "receiverName"
-  },  
+  },
   {
     title: '收货电话',
     data: "receiverPhone"
-  },  
+  },
   {
     title: '产品名称',
     data: 'productName'
@@ -60,9 +60,9 @@ var orderlistsOptions = {
     className: 'handle',
     render: function(cellData, renderType, currentRow) {
       if(currentRow.hasOwnProperty("payed") && (currentRow.payed === true || currentRow.payed === "true")) {
-          var orderId = currentRow.orderId;          
+          var orderId = currentRow.orderId;
           var url='/'+currentRow.typeNameFlag+'/'+orderId;
-          var html = "<a href="+url+">详细信息</a>";    
+          var html = "<a href="+url+">详细信息</a>";
           return html;
       } else {
         return "";
@@ -71,13 +71,13 @@ var orderlistsOptions = {
   }
   ],
    pageLength: 10,
-   lengthMenu: [ 10, 15, 20, 25, 50 ]    
+   lengthMenu: [ 10, 15, 20, 25, 50 ]
 }
 
 Template.specialListsView.helpers({
   speciallistData: function () {
-    return function () { 
-      return Orders.find({host: /KYLPC|KYLWX/, typeNameFlag: 'special'}).fetch(); 
+    return function () {
+      return Orders.find({host: /KYLPC|KYLWX|KYLWAP/, typeNameFlag: 'special'}).fetch();
     };
   },
   optionsObject: orderlistsOptions

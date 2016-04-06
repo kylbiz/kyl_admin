@@ -12,13 +12,12 @@ Meteor.publish('getAllOrders', function() {
     }).fetch();
 
     var userIdLists = [];
-    // var length = user.count();
     for(var i = 0; i < users.length; i++) {
       userIdLists.push(users[i]._id);
     }
 
     return Orders.find({
-      host: /KYLPC|KYLWX/,
+      host: /KYLPC|KYLWX|KYLWAP/,
       'userId': {
         $nin: userIdLists
       }
@@ -26,7 +25,7 @@ Meteor.publish('getAllOrders', function() {
       sort: {orderId: -1}
     });
   } else {
-    return Orders.find({host: /KYLPC|KYLWX/}, {
+    return Orders.find({host: /KYLPC|KYLWX|KYLWAP/}, {
       sort: {orderId: -1}
     });
   }
@@ -58,7 +57,7 @@ Meteor.publish('getOrderTypeLists', function(typeNameFlag) {
     }
     var orders =  Orders.find({
       typeNameFlag: typeNameFlag,
-      host: /KYLPC|KYLWX/,
+      host: /KYLPC|KYLWX|KYLWAP/,
       'userId': {
         $nin: userIdLists
       }
@@ -69,13 +68,13 @@ Meteor.publish('getOrderTypeLists', function(typeNameFlag) {
   } else {
     return Orders.find({
       typeNameFlag: typeNameFlag,
-      host: /KYLPC|KYLWX/
+      host: /KYLPC|KYLWX|KYLWAP/
     }, {
       sort: {orderId: -1}
     });
   }
 
-  // return Orders.find({typeNameFlag: typeNameFlag, host: /KYLPC|KYLWX/});
+  // return Orders.find({typeNameFlag: typeNameFlag, host: /KYLPC|KYLWX|KYLWAP/});
 })
 
 Meteor.publish('getUser', function(userId) {

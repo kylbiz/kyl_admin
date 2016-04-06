@@ -2,33 +2,24 @@ var orderlistsOptions = {
   columns: [
   {
     title: '订单编号',
-    data: 'orderId', 
+    data: 'orderId',
     className: 'orderId'
   },
   {
     title: '下单用户',
     data: "username"
-  },      
+  },
   {
     title: '收货人',
     data: "receiverName"
-  },  
+  },
   {
     title: '收货人电话',
     data: "receiverPhone"
-  }, 
+  },
   {
     title: '产品名称',
-    data: 'productName',
-    render: function(cellData, renderType,currentRow) {
-      if(currentRow.host=="KYLWX") {
-        return currentRow.servicesNameList[0].label;
-      }
-      else {
-        //console.log(cellData);
-        return cellData;
-      }
-    }    
+    data: 'productName'
   },
   {
     title: '金额',
@@ -73,20 +64,20 @@ var orderlistsOptions = {
         return html;
       } else {
         return "";
-      }    
+      }
     }
   }
   ],
   pageLength: 10,
-  lengthMenu: [10, 15, 20,25, 50]  
+  lengthMenu: [10, 15, 20,25, 50]
 }
 
-var reactiveFun = function () { 
+var reactiveFun = function () {
   var orders = Orders.find({typeNameFlag: 'finance'});
   if(orders.count() === 0) {
     return [];
   } else {
-    return orders.fetch() || []; 
+    return orders.fetch() || [];
   }
 };
 
@@ -94,7 +85,7 @@ Template.financelist_partial.helpers({
   orderlistData: function () {
     return reactiveFun;
   },
-  optionsObject: orderlistsOptions 
+  optionsObject: orderlistsOptions
 });
 
 Template.financeList.helpers({

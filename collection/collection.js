@@ -55,9 +55,13 @@ Orders.helpers({
     }
   },
   productName: function() {
-    if(this.servicesNameList) {
-      return this.servicesNameList[0].name;
+    var productName = '';
+    if ( (this.host == 'KYLWAP') || (this.host == 'KYLWX') ) {
+      productName = this.servicesNameList[0].label || this.servicesNameList[0].name;
+    } else {
+      productName = this.servicesNameList[0].name;
     }
+    return productName || '未知';
   },
 
   businessScopeL: function() {
@@ -166,6 +170,8 @@ Orders.helpers({
         return "新版微信";
       } else if(this.host === "KYLPC") {
         return "官网";
+      } else if (this.host === "KYLWAP") {
+        return "移动端";
       } else {
         return this.host;
       }
