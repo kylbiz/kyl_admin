@@ -54,6 +54,11 @@ var orderlistsOptions = {
     }
   },
   {
+    title: '支付时间',
+    className: 'width-80',
+    data: 'payedTimeL',
+  },
+  {
     title: "操作",
     className: 'handle',
     render: function(cellData, renderType, currentRow) {

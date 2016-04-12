@@ -55,6 +55,11 @@ var orderlistsOptions = {
     }
   },
   {
+    title: '支付时间',
+    className: 'width-80',
+    data: 'payedTimeL',
+  },
+  {
    title: "当前状态",
    className: 'handle',
    data: 'productProgress.status',

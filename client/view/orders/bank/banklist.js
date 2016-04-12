@@ -2,7 +2,7 @@ var orderlistsOptions = {
   columns: [
   {
     title: '订单编号',
-    data: 'orderId', 
+    data: 'orderId',
     className: 'orderId'
   },
   {
@@ -12,11 +12,11 @@ var orderlistsOptions = {
   {
     title: '收货人',
     data: "receiverName"
-  },  
+  },
   {
     title: '收货人电话',
     data: "receiverPhone"
-  }, 
+  },
   {
     title: '产品名称',
     data: 'productName'
@@ -52,7 +52,12 @@ var orderlistsOptions = {
         return html;
       }
     }
-  },  
+  },
+  {
+    title: '支付时间',
+    className: 'width-80',
+    data: 'payedTimeL',
+  },
   {
     title: "操作",
     className: 'handle',
@@ -69,18 +74,18 @@ var orderlistsOptions = {
   }
   ],
   pageLength: 10,
-  lengthMenu: [10, 15, 20,25, 50]  
+  lengthMenu: [10, 15, 20,25, 50]
 }
 
-var reactiveFun = function () { 
-  return Orders.find({typeNameFlag: 'bank'}).fetch(); 
+var reactiveFun = function () {
+  return Orders.find({typeNameFlag: 'bank'}).fetch();
 };
 
 Template.bankList_partial.helpers({
   orderlistData: function () {
     return reactiveFun;
   },
-  optionsObject: orderlistsOptions 
+  optionsObject: orderlistsOptions
 });
 
 Template.bankList.helpers({

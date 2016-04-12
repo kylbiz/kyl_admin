@@ -41,18 +41,25 @@ Date.prototype.Format = function (fmt) { //author: meizz
 Orders.helpers({
   createTimeL: function () {
     if (this.createTime) {
-      var createTimeL = this.createTime;
-      var year = createTimeL.getFullYear();
-      var month = createTimeL.getMonth() + 1;
-      var date= createTimeL.getDate();
-      var hours = createTimeL.getHours();
-      var minutes = createTimeL.getMinutes();
-      var createTime =  year+ '-' +  month +'-' + date + ' ' + hours + ':' + minutes;
-      return createTime;
+      return moment(this.createTime).format('YYYY-MM-DD HH:mm');
+      // var createTimeL = this.createTime;
+      // var year = createTimeL.getFullYear();
+      // var month = createTimeL.getMonth() + 1;
+      // var date= createTimeL.getDate();
+      // var hours = createTimeL.getHours();
+      // var minutes = createTimeL.getMinutes();
+      // var createTime =  year+ '-' +  month +'-' + date + ' ' + hours + ':' + minutes;
+      // return createTime;
       // return moment(this.createTime).format("YYYY年MM月DD日 H:mm");
     } else {
-      return null;
+      return '未知';
     }
+  },
+  payedTimeL: function () {
+    if (this.payedTime) {
+      return moment(this.payedTime).format('YYYY-MM-DD HH:mm');
+    }
+    return '未知';
   },
   productName: function() {
     var productName = '';
