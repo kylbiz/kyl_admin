@@ -1,7 +1,7 @@
-Template.editorFactory.onCreated(function(){  
+Template.editorFactory.onCreated(function(){
     Session.set("baseInfoEdit",false);
     Session.set("vocationEdit",false);
-    Session.set("mainInfoEdit",false);  
+    Session.set("mainInfoEdit",false);
     Session.set("expressInfoEdit",false);
     Session.set("introInfoEdit",false);
     Session.set("contractorEdit",false);
@@ -13,7 +13,7 @@ Template.editorFactory_partial.onCreated(function() {
 
 Template.editorFactory_partial.events({
   "click .editAddress": function(e, template) {
-    Session.set("addressEdit", true);  
+    Session.set("addressEdit", true);
   },
   "click .cancelAddress": function(event) {
     Session.set("addressEdit", false);
@@ -42,19 +42,19 @@ Template.editorFactory_partial.events({
 
 Template.editorFactory_partial.helpers({
   "baseInfoEdit":function(){
-    return Session.get("baseInfoEdit");    
+    return Session.get("baseInfoEdit");
   },
   "vocationEdit":function(){
-    return Session.get("vocationEdit"); 
+    return Session.get("vocationEdit");
   },
   "mainInfoEdit":function(){
-    return Session.get("mainInfoEdit"); 
+    return Session.get("mainInfoEdit");
   },
   "expressInfoEdit":function(){
     return Session.get("expressInfoEdit");
   },
   "introInfoEdit":function(){
-    return Session.get("introInfoEdit"); 
+    return Session.get("introInfoEdit");
   },
   "contractorEdit":function(){
     return Session.get("contractorEdit");
@@ -77,7 +77,7 @@ Template.editorFactory.events({
   "click .cancelBtn":function(e,template){
     var prop=$(e.currentTarget).closest(".module").data("module")
     Session.set(prop,false);
-    return false;  
+    return false;
   }
 })
 
@@ -116,7 +116,7 @@ Template.editorFactory.events({
     var supervisorId = $(".supervisorId").val() || "";
     var orderId = $(".orderId").val() || "";
 
-    if(orderId && legalPersonName && legalPersonId 
+    if(orderId && legalPersonName && legalPersonId
       && legalPersonPhone && legalPersonEmail
       && supervisorName && supervisorId) {
       var options = {
@@ -131,7 +131,7 @@ Template.editorFactory.events({
       };
       Meteor.call("OrderEditPerson", options);
     }
-  } 
+  }
 });
 
 Template.editorFactory.events({
@@ -142,6 +142,8 @@ Template.editorFactory.events({
     var alternativeName3 = $(".alternativeName3").val() || "";
     var alternativeName4 = $(".alternativeName4").val() || "";
     var mainName = $(".mainName").val() || "";
+
+    console.log(orderId, mainName, alternativeName1, alternativeName2, alternativeName3, alternativeName4);
 
     if(orderId && mainName && (alternativeName1 || alternativeName2 || alternativeName3 || alternativeName4)) {
       var options = {
@@ -184,7 +186,7 @@ Template.editorFactory_partial.helpers({
     };
     return self.industrySmall;
   }
-}) 
+})
 
 
 
@@ -249,7 +251,7 @@ Template.classify.helpers({
     var business1 = Business1.findOne({businessBig: '销售类'});
     if(business1) {
       return business1.businessSmall
-    }    
+    }
   }
 
 })
@@ -289,7 +291,7 @@ Template.itemR.events({
         orderId: orderId,
         contents: contents
       };
-    Meteor.call('UpdateIndustryDetail', options);      
+    Meteor.call('UpdateIndustryDetail', options);
     $("#itemTpl").modal("hide");
     }
   }
@@ -336,11 +338,11 @@ Template.editorFactory.events({
     var financialStaffName = $("#financialStaffName").val() || "";
     var financialStaffId = $("#financialStaffId").val() || "";
     var financialStaffPhone = $("#financialStaffPhone").val() || "";
-    var financialStaffEmail = $("#financialStaffEmail").val() || ""; 
-    
+    var financialStaffEmail = $("#financialStaffEmail").val() || "";
+
     //财务负责方式
     var financialAgent =$("#agentSelect").val().trim()||"";
-    
+
     if(orderId && liaisonsName && IdReg.test(liaisonsId) && PhoneReg.test(liaisonsPhone) && financialStaffName && IdReg.test(financialStaffId) && PhoneReg.test(financialStaffPhone) && EmailReg.test(liaisonsEmail) && EmailReg.test(financialStaffEmail) && financialStaffId !== liaisonsId) {
       var options = {
         orderId: orderId,
@@ -358,7 +360,7 @@ Template.editorFactory.events({
           financialAgent: financialAgent
         }
       };
-      Meteor.call('CompayContractorHandle', options);    
+      Meteor.call('CompayContractorHandle', options);
     }
   }
 });
@@ -379,18 +381,27 @@ Template.editorFactory.events({
 });
 
 //财务负责人编辑状态
-Template.editorFactory_partial.onRendered(function(){  
-  Session.set("editAgent",Orders.findOne().contractor.financialStaff.financialAgent);  
+Template.editorFactory_partial.onRendered(function(){
+  var orderInfo = Orders.findOne() || {};
+  if (orderInfo.contractor && orderInfo.contractor.financialStaff) {
+    Session.set("editAgent",Orders.findOne().contractor.financialStaff.financialAgent);
+  }
+
   this.autorun(function(){
     if(!Session.get("contractorEdit")) {
-      Session.set("editAgent",Orders.findOne().contractor.financialStaff.financialAgent);      
-    }    
-  })  
+      if (orderInfo.contractor && orderInfo.contractor.financialStaff) {
+        Session.set("editAgent",Orders.findOne().contractor.financialStaff.financialAgent);
+      }
+    }
+  })
 });
 
 //财务负责人编辑状态
 Template.editorFactory_partial.helpers({
   "financialAgent":function(){
-    return Session.get("editAgent");               
+    return Session.get("editAgent");
+  },
+  order: function () {
+    return Orders.findOne();
   }
 })

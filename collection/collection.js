@@ -83,7 +83,7 @@ Orders.helpers({
     if(this.companyName && this.companyName.mainName) {
       var mainName = this.companyName.mainName;
       var industrySmall = this.industrySmall;
-      return mainName + '（上海）' + industrySmall + '有限责任公司';
+      return mainName;
     }
   },
   alternativeName: function() {
