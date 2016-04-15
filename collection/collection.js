@@ -81,10 +81,11 @@ Orders.helpers({
   },
   companyNameL: function() {
     if(this.companyName && this.companyName.mainName) {
-      var mainName = this.companyName.mainName;
-      var industrySmall = this.industrySmall;
-      return mainName;
+      var mainName = this.companyName.mainName || "";
+      var industrySmall = this.industrySmall || "";
+      return mainName + '（上海）' + industrySmall + '有限公司';
     }
+    return "";
   },
   alternativeName: function() {
     if(this.companyName) {
