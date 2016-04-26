@@ -3,10 +3,12 @@ var orderlistsOptions = {
   // {
   //   title: '订单编号',
   //   data: 'orderId',
+  //   className: 'width-100',
   //   className: 'orderId'
   // },
   {
     title: '支付单号',
+    // className: 'width-100',
     data: 'openidL',
   },
   {
@@ -70,8 +72,13 @@ var orderlistsOptions = {
     render: function(cellData, renderType, currentRow) {
       if(currentRow.hasOwnProperty("payed") && (currentRow.payed === true || currentRow.payed === "true")) {
           var orderId = currentRow.orderId;
-          var url='/'+currentRow.typeNameFlag+'/'+orderId;
-          var html = "<a href="+url+">详细信息</a>";
+          var remark = currentRow.remark || "";
+          var url='/'+currentRow.typeNameFlag+'/'+ orderId;
+          var html = "<a href="+url+">详细信息, </a>&nbsp;&nbsp;"
+                    + "<a href='#' class='set' data-toggle='modal' data-target='#orderRemark' "
+                    + "data-orderid='" + orderId + "' "
+                    + "data-remark='" + remark + "' "
+                    + ">备注信息</a>";
           return html;
       } else {
         return "";

@@ -1,13 +1,15 @@
 <template name="list">
     {{#content title="全部订单" mainTitle="订单管理" listNum=listNum }}
     <div class="row">
-        <div class="col-md-12">       
+        <div class="col-md-12">
         {{#source_boxTemplate title="全部订单"}}
             {{> list_partial }}
         {{/source_boxTemplate}}
         </div>
-    </div>    
+    </div>
     {{/content}}
+
+    {{> orderRemark}}
 </template>
 
 
@@ -37,5 +39,5 @@
     {{> ReactiveDatatable tableData=orderlistData options=optionsObject }}
     <div>
       {{> datetime }}
-    </div>  
+    </div>
 </template>

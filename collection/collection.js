@@ -63,7 +63,7 @@ Orders.helpers({
       'KYLWX': '微信支付',
       'KYLWAP': '移动端支付宝支付',
     }[host] || "未知渠道";
-    return payHost + '-' + this.openid;
+    return payHost + '-' + this.openid + "<br/>" + "(开业啦订单编号:" + this.orderId + ")";
   },
   createTimeL: function () {
     if (this.createTime) {
