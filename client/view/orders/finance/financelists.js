@@ -1,9 +1,13 @@
 var orderlistsOptions = {
   columns: [
+  // {
+  //   title: '订单编号',
+  //   data: 'orderId',
+  //   className: 'orderId'
+  // },
   {
-    title: '订单编号',
-    data: 'orderId',
-    className: 'orderId'
+    title: '支付单号',
+    data: 'openidL',
   },
   {
     title: '下单用户',

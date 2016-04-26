@@ -39,6 +39,32 @@ Date.prototype.Format = function (fmt) { //author: meizz
 
 
 Orders.helpers({
+  // payOrderId: function () {
+  //   if (this.payed) {
+  //     var openid = this.openid;
+  //     var host = this.host;
+  //     var payLog = PayLogs.findOne({openid: openid}) || {};
+
+  //     payOrderId = '';
+  //     if (host == "KYLPC") {
+  //       // payOrderId = payLog.
+  //     } else if (host == "KYLWX") {
+
+  //     } else if (host == "KYLWAP") {
+
+  //     }
+  //     return payOrderId;
+  //   }
+  // },
+  openidL: function () {
+    var host = this.host;
+    var payHost = {
+      'KYLPC': 'PC端支付宝支付',
+      'KYLWX': '微信支付',
+      'KYLWAP': '移动端支付宝支付',
+    }[host] || "未知渠道";
+    return payHost + '-' + this.openid;
+  },
   createTimeL: function () {
     if (this.createTime) {
       return moment(this.createTime).format('YYYY-MM-DD HH:mm');
