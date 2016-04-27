@@ -36,7 +36,4 @@ meteorhacks:async            # 1.0.0  Set of async utilities to work with NPM m.
 meteorhacks:npm              # 1.5.0  Use npm modules with your Meteor App
 mfactory:admin-lte           # 0.0.2  AdminLTE dashboard theme
 momentjs:moment              # 2.10.6* Moment.js (official): parse, validate, m...
-# npm-container                # 1.2.0+ Contains all your npm dependencies
-
-
 npm-container

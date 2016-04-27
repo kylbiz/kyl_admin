@@ -10,31 +10,75 @@
     {{/content}}
 </template>
 
-<!-- <template name="list_partial">
-<table class="table table-striped">
-    <tbody>
-        <tr>
-            <td class="active">orderId</td>
-            <td class="active">username</td>
-            <td class="active">收货人</td>
-        </tr>
-        {{#each ordersLists}}
-        <tr>
-            <td class="active">{{orderId}}</td>
-            <td class="active">{{username}}</td>
-            <td class="active">{{receiverName}}</td>
-        </tr>
-        {{/each}}
-    </tbody>
-</table>
-{{> pagesNav}}
-</template>
- -->
-
-
-<template name="list_partial">
+<template name="list_partial1">
     {{> ReactiveDatatable tableData=orderlistData options=optionsObject }}
     <div>
       {{> datetime }}
-    </div>  
+    </div>
+</template>
+
+<template name="list_partial">
+    <!-- <label style="color:#030202;"><input type="text" name="" value=""></label> -->
+    <div class="input-group" style="width: 100%;margin-bottom:20px;">
+        <input type="text" name="table_search" class="from-control input-sm pull-left" placeholder="搜索" />
+        <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
+        <label class="pull-right">
+        每页显示
+            <select name="dataPage">
+                <option value="10">10</option>
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+            </select>条数据
+        </label>
+    </div>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>订单编号</th>
+                <th>下单用户</th>
+                <th>收货人</th>
+                <th>收货电话</th>
+                <th>产品名称</th>
+                <th>金额</th>
+                <th>订单来源</th>
+                <th>下单时间</th>
+                <th>支付状态</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>data</td>
+                <td>data</td>
+                <td>data</td>
+                <td>data</td> 
+                <td>data</td>
+                <td>data</td>
+                <td>data</td>
+                <td>data</td>
+                <td>data</td>
+            </tr>
+        </tbody>
+    </table>
+<nav>
+<!-- <label class="pull-left" style="margintop">当前页面有10/100条数据</label> -->
+  <ul class="pagination pull-right">
+    <li>
+      <a href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li><a href="#">1</a></li>
+    <li><a href="#">2</a></li>
+    <li><a href="#">3</a></li>
+    <li><a href="#">4</a></li>
+    <li><a href="#">5</a></li>
+    <li>
+      <a href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
 </template>

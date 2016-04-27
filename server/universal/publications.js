@@ -26,7 +26,9 @@ Meteor.publish('getAllOrders', function() {
     });
   } else {
     return Orders.find({host: /KYLPC|KYLWX|KYLWAP/}, {
-      sort: {orderId: -1}
+      sort: {orderId: -1},
+      skip: 9,
+      limit: 10,
     });
   }
 })
