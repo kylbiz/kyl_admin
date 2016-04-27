@@ -79,7 +79,7 @@ Meteor.methods({
       throw new Meteor.Error("参数非法");
     }
 
-    Orders.upsert({orderId: orderId}, {$set: {remark: remarkInfo}});
+    Orders.upsert({orderId: orderId}, {$set: {remark: remarkInfo || ""}});
   }
 });
 

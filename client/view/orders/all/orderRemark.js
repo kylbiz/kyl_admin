@@ -6,8 +6,6 @@ Template.orderRemark.onRendered( function(){
       var orderId = button.data("orderid");
       var remark = button.data("remark") || "";
 
-      console.log("orderId", orderId);
-
       modal.find("#remarkInfo").val(remark);
       modal.find("#remarkInfo").data("orderid", orderId);
     })
