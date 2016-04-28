@@ -48,17 +48,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>data</td>
-                <td>data</td>
-                <td>data</td>
-                <td>data</td> 
-                <td>data</td>
-                <td>data</td>
-                <td>data</td>
-                <td>data</td>
-                <td>data</td>
-            </tr>
+            {{> order_table}}  
         </tbody>
     </table>
 <nav>
@@ -81,4 +71,18 @@
     </li>
   </ul>
 </nav>
+</template>
+
+<template name='order_table'>
+   <tr>
+       <td>{{orderId}}</td>
+       <td>{{username]}}</td>
+       <td>{{receiverName}}</td>
+       <td>{{receiverPhone}}</td> 
+       <td>data</td>
+       <td>data</td>
+       <td>data</td>
+       <td>data</td>
+       <td>data</td>
+   </tr>
 </template>

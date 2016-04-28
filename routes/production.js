@@ -153,7 +153,6 @@ Router.route('/registration/:orderId', {
   }
 });
 
-
 Router.route('/edit/registration/:orderId', {
   name: 'editorFactory',
   subscriptions: function() {
@@ -183,8 +182,6 @@ Router.route('/edit/registration/:orderId', {
     }
   }
 });
-
-
 
 Router.route('/assurance/:orderId', {
   name: 'assuranceView',
