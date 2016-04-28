@@ -1,9 +1,15 @@
 var orderlistsOptions = {
   columns: [
+  // {
+  //   title: '订单编号',
+  //   data: 'orderId',
+  //   className: 'width-100',
+  //   className: 'orderId'
+  // },
   {
-    title: '订单编号',
-    data: 'orderId',
-    className: 'orderId'
+    title: '支付单号',
+    // className: 'width-100',
+    data: 'openidL',
   },
   {
     title: '下单用户',
@@ -66,8 +72,13 @@ var orderlistsOptions = {
     render: function(cellData, renderType, currentRow) {
       if(currentRow.hasOwnProperty("payed") && (currentRow.payed === true || currentRow.payed === "true")) {
           var orderId = currentRow.orderId;
-          var url='/'+currentRow.typeNameFlag+'/'+orderId;
-          var html = "<a href="+url+">详细信息</a>";
+          var remark = currentRow.remark || "";
+          var url='/'+currentRow.typeNameFlag+'/'+ orderId;
+          var html = "<a href="+url+">详细信息, </a>&nbsp;&nbsp;"
+                    + "<a href='#' class='set' data-toggle='modal' data-target='#orderRemark' "
+                    + "data-orderid='" + orderId + "' "
+                    + "data-remark='" + remark + "' "
+                    + ">备注信息</a>";
           return html;
       } else {
         return "";
@@ -83,7 +94,7 @@ Template.list_partial.helpers({
   orderlistData: function () {
     return function () {
       // return Orders.find({payed: true}, {sort: {orderId: -1}}).fetch();
-      return Orders.find({}).fetch();
+      return Orders.find({}, {payedTime: -1}).fetch();
     };
   },
   optionsObject: orderlistsOptions,
@@ -139,6 +150,8 @@ Template.list.helpers({
 })
 
 Template.list.onRendered(function () {
+  $("table.table").DataTable().order([10, 'asc']).draw();
+
   $.fn.dataTable.ext.search.push(
     function (settings, data, dataIndex) {
       var min = $('#start_date').val();

@@ -16,6 +16,9 @@
 
 <template name="wxGoodList">
   {{> ReactiveDatatable tableData=goodInfo options=tableOpt }}
+   {{> navPaging }}
+
+
   <div>
     {{> datetime }}
   </div>

@@ -14,6 +14,8 @@
 
 <template name="registrationInfoLists">
   {{> ReactiveDatatable tableData=registrationListsData options=optionsObject }}
+  {{> navPaging }}
+
   <div>
     {{> datetime }}
   </div>

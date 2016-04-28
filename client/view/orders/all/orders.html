@@ -1,99 +1,46 @@
 <template name="list">
     {{#content title="全部订单" mainTitle="订单管理" listNum=listNum }}
     <div class="row">
-        <div class="col-md-12">       
+        <div class="col-md-12">
         {{#source_boxTemplate title="全部订单"}}
             {{> list_partial }}
         {{/source_boxTemplate}}
         </div>
     </div>
     {{/content}}
+
+    {{> orderRemark}}
 </template>
 
 <template name="list_partial">
     {{> ReactiveDatatable tableData=orderlistData options=optionsObject }}
-      <nav>
-        <ul class="pagination pull-right">
-          <li>
-            <a href="" aria-label="Previous" class="previous">
-              <span aria-hidden="true">&laquo;</span>
-            </a>
-          </li>
-          {{#each }}
-           {{> tablePaging}}
-          {{/each}}
-          <li>
-            <a href="#" aria-label="Next" class="next">
-              <span aria-hidden="true">&raquo;</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
+    {{> navPaging }}
+
     <div>
       {{> datetime }}
     </div>
+
 </template>
 
-<template name="list_partial1">
 
-    <div class="input-group" style="width: 100%;margin-bottom:20px;">
-        <input type="text" name="table_search" class="from-control input-sm pull-left" placeholder="搜索" />
-        <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
-    </div>
-
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>订单编号</th>
-                <th>下单用户</th>
-                <th>收货人</th>
-                <th>收货电话</th>
-                <th>产品名称</th>
-                <th>金额</th>
-                <th>订单来源</th>
-                <th>下单时间</th>
-                <th>支付状态</th>
-            </tr>
-        </thead>
-        <tbody>
-          {{#each Orders}}
-            {{> order_table}}  
-          {{/each}}
-        </tbody>
-    </table>
-
-<nav>
-  <ul class="pagination pull-right">
-    <li>
-      <a href="" aria-label="Previous" class="previous">
-        <span aria-hidden="true">&laquo;</span>
-      </a>
-    </li>
-    {{> tablePaging}}
-    <li>
-      <a href="#" aria-label="Next" class="next">
-        <span aria-hidden="true">&raquo;</span>
-      </a>
-    </li>
-  </ul>
-</nav>
+<template name="navPaging">
+  <nav>
+    <ul class="pagination pull-right">
+      <li>
+        <a href="" aria-label="Previous" class="previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+       {{> tablePaging}}
+      <li>
+        <a href="#" aria-label="Next" class="next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
 </template>
-<!-- 
-<template name='order_table'>
-   <tr>
-       <td>{{orderId}}</td>
-       <td>{{username}}</td>
-       <td>{{receiverName}}</td>
-       <td>{{receiverPhone}}</td> 
-       <td>{{productName}}</td>
-       <td>{{moneyAmount}}</td>
-       <td>{{orderHost}}</td>
-       <td>{{createTimeL}}</td>
-       <td>{{handle}}</td>
-   </tr>
-</template> -->
 
 <template name="tablePaging">
   <li><a href="/table?page=1&&num=10">1</a></li>
- 
 </template>

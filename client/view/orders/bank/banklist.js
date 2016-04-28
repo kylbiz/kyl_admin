@@ -1,9 +1,13 @@
 var orderlistsOptions = {
   columns: [
+  // {
+  //   title: '订单编号',
+  //   data: 'orderId',
+  //   className: 'orderId'
+  // },
   {
-    title: '订单编号',
-    data: 'orderId',
-    className: 'orderId'
+    title: '支付单号',
+    data: 'openidL',
   },
   {
     title: '下单用户',
@@ -78,7 +82,7 @@ var orderlistsOptions = {
 }
 
 var reactiveFun = function () {
-  return Orders.find({typeNameFlag: 'bank'}).fetch();
+  return Orders.find({typeNameFlag: 'bank'}, {payedTime: -1}).fetch();
 };
 
 Template.bankList_partial.helpers({

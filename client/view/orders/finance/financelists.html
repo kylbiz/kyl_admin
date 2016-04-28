@@ -13,6 +13,9 @@
 
 <template name="financelist_partial">
     {{> ReactiveDatatable tableData=orderlistData options=optionsObject }}
+    
+    {{> navPaging }}
+    
     <div>
     {{> datetime }}
     </div>

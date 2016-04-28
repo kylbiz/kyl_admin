@@ -1,9 +1,13 @@
 var orderlistsOptions = {
   columns: [
+  // {
+  //   title: '订单编号',
+  //   data: 'orderId',
+  //   className: 'orderId'
+  // },
   {
-    title: '订单编号',
-    data: 'orderId', 
-    className: 'orderId'
+    title: '支付单号',
+    data: 'openidL',
   },
   {
     title: '下单用户',
@@ -12,11 +16,11 @@ var orderlistsOptions = {
   {
     title: '收货人',
     data: "receiverName"
-  },  
+  },
   {
     title: '收货人电话',
     data: "receiverPhone"
-  }, 
+  },
   {
     title: '产品名称',
     data: 'productName'
@@ -52,7 +56,7 @@ var orderlistsOptions = {
   //       return html;
   //     }
   //   }
-  // }, 
+  // },
   // {
   //   title: "操作",
   //   className: 'handle',
@@ -69,12 +73,12 @@ var orderlistsOptions = {
   // }
   ],
   pageLength: 10,
-  lengthMenu: [10, 15, 20,25, 50]  
+  lengthMenu: [10, 15, 20,25, 50]
 }
 
 
 var reactiveFun = function () {
-  var orders = Orders.find({typeNameFlag: 'assurance'});
+  var orders = Orders.find({typeNameFlag: 'assurance'}, {payedTime: -1});
   return orders.fetch();
 };
 
@@ -82,7 +86,7 @@ Template.assurancelist_partial.helpers({
   orderlistData: function () {
     return reactiveFun;
   },
-  optionsObject: orderlistsOptions 
+  optionsObject: orderlistsOptions
 });
 
 
@@ -120,7 +124,7 @@ Template.detailTpl_partial.onRendered(function(){
         };
         Session.set('toggle',false);
       }
-    });   
+    });
 });
 
 Template.detailTpl_partial.helpers({
@@ -133,7 +137,7 @@ Template.detailTpl_partial.helpers({
     else
       return 'btn-info edit-btn'
   },
-  
+
 });
 
 

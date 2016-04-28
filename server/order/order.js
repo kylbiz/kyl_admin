@@ -63,8 +63,25 @@ Meteor.methods({
         }
       })
     }
-  }
+  },
+
 })
+
+
+Meteor.methods({
+  "UpdateOrderRemark": function (orderId, remarkInfo) {
+    if (!orderId || !remarkInfo) {
+      throw new Meteor.Error("参数不可为空");
+    }
+
+    var orderInfo = Orders.findOne({orderId: orderId}) || false;
+    if (!orderInfo ) {
+      throw new Meteor.Error("参数非法");
+    }
+
+    Orders.upsert({orderId: orderId}, {$set: {remark: remarkInfo || ""}});
+  }
+});
 
 
 
@@ -164,7 +181,7 @@ Meteor.methods({
           console.log('add holder succeed');
         }
       })
-   }    
+   }
   }
 });
 
@@ -179,8 +196,8 @@ Meteor.methods({
       var legalPersonEmail = options.legalPersonEmail || "";
       var supervisorName = options.supervisorName || "";
       var supervisorId = options.supervisorId || "";
-      if(orderId && legalPersonName 
-        && legalPersonId && supervisorName 
+      if(orderId && legalPersonName
+        && legalPersonId && supervisorName
         && supervisorId) {
         Orders.update({orderId: orderId }, {
           $set: {
@@ -216,8 +233,8 @@ Meteor.methods({
 Meteor.methods({
   'updateCompanyName': function(options) {
     log("updateCompanyName: Hi, I am called.", options);
-    if(options && options.orderId && options.mainName 
-      && (options.alternativeName1 || options.alternativeName2 
+    if(options && options.orderId && options.mainName
+      && (options.alternativeName1 || options.alternativeName2
         || options.alternativeName3 || options.alternativeName4)) {
       var orderId = options.orderId;
       delete options.orderId;
@@ -237,7 +254,7 @@ Meteor.methods({
     } else {
       log('update company name error, for the information you provided not valid', options);
 
-    }      
+    }
   }
 })
 
@@ -256,7 +273,7 @@ Meteor.methods({
       if(business) {
         businessScope = business.content;
       }
-      
+
       if(businessScope.length > 0 && industryOptions && orderId && industryBig !== null && industrySmall !== null && industryBig !== "" && industrySmall !== "") {
 
         Orders.update({orderId: orderId}, {
@@ -275,7 +292,7 @@ Meteor.methods({
 
       } else {
        log('update industry type error, check you parameters', industryOptions);
-      }    
+      }
     }
   }
 })
@@ -285,7 +302,7 @@ Meteor.methods({
 
 Meteor.methods({
   'EditScope': function(options) {
-    if(options && options.orderId 
+    if(options && options.orderId
       && options.contents instanceof Array ) {
       Orders.update({orderId: options.orderId}, {
         $set: {
@@ -300,7 +317,7 @@ Meteor.methods({
       })
     } else {
       log("Edit business scope failed for options illegal", options);
-    } 
+    }
   }
 })
 
@@ -312,7 +329,7 @@ Meteor.methods({
     var orderId = options.orderId;
     var contents = options.contents;
 
-    if(options && orderId 
+    if(options && orderId
       && contents instanceof Array ) {
       Orders.update({orderId: orderId}, {
         $pushAll: {
@@ -334,7 +351,7 @@ Meteor.methods({
 Meteor.methods({
   "UpdateOrderConsigner": function(options) {
       var EmailReg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
-      var PhoneReg = /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/;  
+      var PhoneReg = /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/;
       if(!options || !options.orderId || !options.consignerName || !EmailReg.test(options.consignerEmail) || !PhoneReg.test(options.consignerPhone)) {
         var err = "consigner information not complately";
         log(err, options);
@@ -357,7 +374,7 @@ Meteor.methods({
             log("update order consigner succeed");
           }
         })
-      }    
+      }
   }
 });
 
@@ -369,14 +386,14 @@ Meteor.methods({
     var EmailReg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
     var PhoneReg = /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/;
 
-    if(!options || !options.orderId 
-      || !options.liaisons 
-      || !IdReg.test(options.liaisons.liaisonsId) 
-      || !PhoneReg.test(options.liaisons.liaisonsPhone) 
+    if(!options || !options.orderId
+      || !options.liaisons
+      || !IdReg.test(options.liaisons.liaisonsId)
+      || !PhoneReg.test(options.liaisons.liaisonsPhone)
       || !EmailReg.test(options.liaisons.liaisonsEmail)
       || !options.financialStaff
-      || !IdReg.test(options.financialStaff.financialStaffId) 
-      || !PhoneReg.test(options.financialStaff.financialStaffPhone) 
+      || !IdReg.test(options.financialStaff.financialStaffId)
+      || !PhoneReg.test(options.financialStaff.financialStaffPhone)
       || !EmailReg.test(options.financialStaff.financialStaffEmail)) {
       var err = 'contractor information not complately';
       log(err, options);
@@ -407,8 +424,8 @@ Meteor.methods({
 Meteor.methods({
   "updateCompanyAddress": function(options) {
     log("updateCompanyAddress: Hi, I am called");
-    if(!options 
-      || !options.hasOwnProperty("orderId") 
+    if(!options
+      || !options.hasOwnProperty("orderId")
       || !options.hasOwnProperty("companyAddress")
       || !options.hasOwnProperty("companyMoney")) {
       log("updateCompanyAddress: options illegal", options);

@@ -14,9 +14,12 @@
 
 <template name="registrationListsView">
   {{> ReactiveDatatable tableData=orderlistData options=optionsObject }}
+  {{> navPaging}}
+
   <div class="">
     {{> datetime }}
   </div>
+  
   <div class="form-horizontal">
     <div class="form-group">
      <div class="col-sm-12">

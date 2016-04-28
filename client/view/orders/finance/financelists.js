@@ -1,9 +1,13 @@
 var orderlistsOptions = {
   columns: [
+  // {
+  //   title: '订单编号',
+  //   data: 'orderId',
+  //   className: 'orderId'
+  // },
   {
-    title: '订单编号',
-    data: 'orderId',
-    className: 'orderId'
+    title: '支付单号',
+    data: 'openidL',
   },
   {
     title: '下单用户',
@@ -78,7 +82,7 @@ var orderlistsOptions = {
 }
 
 var reactiveFun = function () {
-  var orders = Orders.find({typeNameFlag: 'finance'});
+  var orders = Orders.find({typeNameFlag: 'finance'}, {payedTime: -1});
   if(orders.count() === 0) {
     return [];
   } else {
