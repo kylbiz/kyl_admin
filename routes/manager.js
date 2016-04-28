@@ -1,6 +1,3 @@
-
-
-
 // 后台用户管理
 Router.route('/manager/user', {
   template: 'loading',

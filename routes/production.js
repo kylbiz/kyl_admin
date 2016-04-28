@@ -50,6 +50,10 @@ Router.route('list', {
   }
 });
 
+Router.route('/list/table');
+
+
+
 Router.route('/list/registration', {
   name: 'registrationLists',
   subscriptions: function() {

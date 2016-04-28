@@ -89,6 +89,46 @@ Template.list_partial.helpers({
   optionsObject: orderlistsOptions,
   ordersLists: function() {
     return Orders.find({});
+  },
+  Orders() {
+    var params =  Router.current().params.query;
+    var page = parseInt(params.page) || 1;
+    var num = parseInt(params.num) || 10;
+    return Orders.find({},{
+      sort:{createdAt:-1},
+      skip:(page-1)*num,
+      limit:10,
+    });
+  },
+  'click .previous':function() {
+    var params =  Router.current().params.query;
+    var page = parseInt(params.page) || 1;
+    var num = parseInt(params.num) || 10;
+    if (page<=1) {
+      // statement
+      alert('已经是第一页!');
+    }else{
+      return Orders.find({},{
+        sort:{createdAt:-1},
+        skip:(page-2)*num,
+        limit:10,
+      });
+    }
+  },
+  'click .next':function() {
+    var params =  Router.current().params.query;
+    var page = parseInt(params.page) || 1;
+    var num = parseInt(params.num) || 10;
+    if (page*num > Orders.find().count()) {
+      alert('已经是最后一页！')
+    }
+    else {
+      return Orders.find({},{
+        sort:{createdAt:-1},
+        skip:(page)*num,
+        limit:10,
+      });
+    }
   }
 });
 

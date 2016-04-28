@@ -10,27 +10,35 @@
     {{/content}}
 </template>
 
-<template name="list_partial1">
+<template name="list_partial">
     {{> ReactiveDatatable tableData=orderlistData options=optionsObject }}
+      <nav>
+        <ul class="pagination pull-right">
+          <li>
+            <a href="" aria-label="Previous" class="previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          {{#each }}
+           {{> tablePaging}}
+          {{/each}}
+          <li>
+            <a href="#" aria-label="Next" class="next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
     <div>
       {{> datetime }}
     </div>
 </template>
 
-<template name="list_partial">
-    <!-- <label style="color:#030202;"><input type="text" name="" value=""></label> -->
+<template name="list_partial1">
+
     <div class="input-group" style="width: 100%;margin-bottom:20px;">
         <input type="text" name="table_search" class="from-control input-sm pull-left" placeholder="搜索" />
         <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
-        <label class="pull-right">
-        每页显示
-            <select name="dataPage">
-                <option value="10">10</option>
-                <option value="25">25</option>
-                <option value="50">50</option>
-                <option value="100">100</option>
-            </select>条数据
-        </label>
     </div>
 
     <table class="table table-bordered">
@@ -48,41 +56,44 @@
             </tr>
         </thead>
         <tbody>
+          {{#each Orders}}
             {{> order_table}}  
+          {{/each}}
         </tbody>
     </table>
+
 <nav>
-<!-- <label class="pull-left" style="margintop">当前页面有10/100条数据</label> -->
   <ul class="pagination pull-right">
     <li>
-      <a href="#" aria-label="Previous">
+      <a href="" aria-label="Previous" class="previous">
         <span aria-hidden="true">&laquo;</span>
       </a>
     </li>
-    <li><a href="#">1</a></li>
-    <li><a href="#">2</a></li>
-    <li><a href="#">3</a></li>
-    <li><a href="#">4</a></li>
-    <li><a href="#">5</a></li>
+    {{> tablePaging}}
     <li>
-      <a href="#" aria-label="Next">
+      <a href="#" aria-label="Next" class="next">
         <span aria-hidden="true">&raquo;</span>
       </a>
     </li>
   </ul>
 </nav>
 </template>
-
+<!-- 
 <template name='order_table'>
    <tr>
        <td>{{orderId}}</td>
-       <td>{{username]}}</td>
+       <td>{{username}}</td>
        <td>{{receiverName}}</td>
        <td>{{receiverPhone}}</td> 
-       <td>data</td>
-       <td>data</td>
-       <td>data</td>
-       <td>data</td>
-       <td>data</td>
+       <td>{{productName}}</td>
+       <td>{{moneyAmount}}</td>
+       <td>{{orderHost}}</td>
+       <td>{{createTimeL}}</td>
+       <td>{{handle}}</td>
    </tr>
+</template> -->
+
+<template name="tablePaging">
+  <li><a href="/table?page=1&&num=10">1</a></li>
+ 
 </template>
