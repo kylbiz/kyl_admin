@@ -85,7 +85,7 @@ Orders.helpers({
     if (this.payedTime) {
       return moment(this.payedTime).format('YYYY-MM-DD HH:mm');
     }
-    return '未知';
+    return null;
   },
   productName: function() {
     var productName = '';

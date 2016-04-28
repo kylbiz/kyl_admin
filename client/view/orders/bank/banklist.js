@@ -82,7 +82,7 @@ var orderlistsOptions = {
 }
 
 var reactiveFun = function () {
-  return Orders.find({typeNameFlag: 'bank'}).fetch();
+  return Orders.find({typeNameFlag: 'bank'}, {payedTime: -1}).fetch();
 };
 
 Template.bankList_partial.helpers({

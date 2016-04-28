@@ -94,7 +94,7 @@ Template.list_partial.helpers({
   orderlistData: function () {
     return function () {
       // return Orders.find({payed: true}, {sort: {orderId: -1}}).fetch();
-      return Orders.find({}).fetch();
+      return Orders.find({}, {payedTime: -1}).fetch();
     };
   },
   optionsObject: orderlistsOptions,
@@ -110,6 +110,8 @@ Template.list.helpers({
 })
 
 Template.list.onRendered(function () {
+  $("table.table").DataTable().order([10, 'asc']).draw();
+
   $.fn.dataTable.ext.search.push(
     function (settings, data, dataIndex) {
       var min = $('#start_date').val();

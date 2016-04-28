@@ -18,16 +18,18 @@ Meteor.publish('getAllOrders', function() {
 
     return Orders.find({
       host: /KYLPC|KYLWX|KYLWAP/,
+      payed: true,
       'userId': {
         $nin: userIdLists
       }
     }, {
-      sort: {orderId: -1}
+      sort: {payedTime: -1},
+      limit: 150,
     });
   } else {
-    return Orders.find({host: /KYLPC|KYLWX|KYLWAP/}, {
-      sort: {orderId: -1},
-      // limit: 10,
+    return Orders.find({host: /KYLPC|KYLWX|KYLWAP/, payed: true}, {
+      sort: {payedTime: -1},
+      limit: 150,
     });
   }
 })

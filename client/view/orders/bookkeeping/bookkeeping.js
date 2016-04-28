@@ -82,7 +82,7 @@ var orderlistsOptions = {
 }
 
 var reactiveFun = function () {
-  return Orders.find({typeNameFlag: 'bookkeeping'}).fetch();
+  return Orders.find({typeNameFlag: 'bookkeeping'}, {payedTime: -1}).fetch();
 };
 
 Template.bookkeepingListPartital.helpers({

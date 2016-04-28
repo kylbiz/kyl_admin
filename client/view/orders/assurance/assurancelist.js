@@ -78,7 +78,7 @@ var orderlistsOptions = {
 
 
 var reactiveFun = function () {
-  var orders = Orders.find({typeNameFlag: 'assurance'});
+  var orders = Orders.find({typeNameFlag: 'assurance'}, {payedTime: -1});
   return orders.fetch();
 };
 

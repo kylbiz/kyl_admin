@@ -145,7 +145,7 @@ Template.registrationListsView.onRendered(function(){
 
 Template.registrationLists.helpers({
   "listNum": function() {
-    return Orders.find({typeNameFlag: 'registration'}).count();
+    return Orders.find({typeNameFlag: 'registration'}, {payedTime: -1}).count();
   }
 })
 

@@ -82,7 +82,7 @@ var orderlistsOptions = {
 }
 
 var reactiveFun = function () {
-  var orders = Orders.find({typeNameFlag: 'finance'});
+  var orders = Orders.find({typeNameFlag: 'finance'}, {payedTime: -1});
   if(orders.count() === 0) {
     return [];
   } else {
