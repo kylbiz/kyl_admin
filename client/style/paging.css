@@ -1,3 +1,9 @@
 .dataTables_paginate,.paging_simple_numbers{
 	display: none;
 }
+
+.tableCellCount{
+	margin-top:31px;
+	margin-right: 17px;
+	font-size: 16px;
+}
