@@ -13,30 +13,23 @@
 </template>
 
 <template name="list_partial">
-    <input type="hidden" id="allPageSize" value="340">   <!-- 页面总记录数 -->
-    <input type="hidden" id="pageNum" value="1">         <!-- 当前页码 -->
-    <input type="hidden" id="worksTypeId" value="1">      <!-- 分组id -->
-    <div id="pageNumberUpAndDown">
-       <!-- 此处为分页开始 -->
-    </div>
-    {{> ReactiveDatatable tableData=orderlistData options=optionsObject }}
     {{> navPaging }}
+    {{> ReactiveDatatable tableData=orderlistData options=optionsObject }}
     <div>
-      {{> datetime }}
+      {{> datetime tableCount=tableCount}}
     </div>
 </template>
 
 
 <template name="navPaging">
   <nav>
+    <span class="pull-left" style="margin-top: 30px">第{{cellInfo.cellStart}}-{{cellInfo.cellEnd}}条, 共{{tableCellCount}}条</span>
     <ul class="pagination pull-right">
       <li>
         <a href="" aria-label="Previous" class="previous">
           <span aria-hidden="true">&laquo;</span>
         </a>
       </li>
-
-       {{> tablePaging}}
       <li>
         <a href="#" aria-label="Next" class="next">
           <span aria-hidden="true">&raquo;</span>
@@ -46,6 +39,9 @@
   </nav>
 </template>
 
+
 <template name="tablePaging">
-  <li><a href="/table?page=1&&num=10">1</a></li>
+  {{#each $mapped tablePageList}}
+    <li value="{{cellCount}}" class="{{#if $first}}selected{{/if}}"><a href="#">{{cellCount}}</a></li>
+  {{/each}}
 </template>

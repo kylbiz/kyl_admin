@@ -1,18 +1,18 @@
-<template name="assuranceList">    
+<template name="assuranceList">
     {{#content title="社保代理"  mainTitle="订单管理" productType="assurance" listNum=listNum}}
     <div class="row">
-        <div class="col-md-12">       
+        <div class="col-md-12">
         {{#source_boxTemplate title="社保代理"}}
             {{> assurancelist_partial }}
         {{/source_boxTemplate}}
         </div>
-    </div> 
+    </div>
     {{/content}}
 </template>
 
 <template name="assurancelist_partial">
+    {{> navPaging}}
     {{> ReactiveDatatable tableData=orderlistData options=optionsObject }}
-    {{> navPaging }}
     <div class="">
     {{> datetime }}
     </div>
@@ -65,9 +65,9 @@
         <div class="form-group">
           <label class="col-sm-3 control-label"></label>
           <div class="col-sm-9">
-            <a href="/list/{{order.typeNameFlag}}"><button class="btn btn-info" type="button"> 返回列表</button></a>            
+            <a href="/list/{{order.typeNameFlag}}"><button class="btn btn-info" type="button"> 返回列表</button></a>
           </div>
-        </div>      
+        </div>
     </div>
     <div class="col-sm-6">
       {{#if isEditable}}
@@ -132,7 +132,7 @@
             <span class="form-control">{{order.createTimeL}}</span>
           </div>
         </div>
-      {{/if}}  
+      {{/if}}
 
       <div class="form-group">
           <div class="center">
@@ -144,7 +144,7 @@
             {{/if}}
             </button>
           </div>
-     </div> 
+     </div>
 
     </div>
   </div>
