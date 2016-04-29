@@ -49,7 +49,7 @@ var orderlistsOptions = {
       if(currentRow.hasOwnProperty("payed")) {
         var payed = currentRow.payed;
         if(payed === true || payed === "true") {
-          var html = '<span class="label label-success">已支付</span>';
+          var html = '<span class="Mlabel label-success">已支付</span>';
           return html;
         } else {
           var html = '<span class="label label-default">未支付</span>';
