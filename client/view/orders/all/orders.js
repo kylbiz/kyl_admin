@@ -160,6 +160,14 @@ Template.navPaging.onRendered(function () {
 Template.navPaging.helpers({
   tableCellCount: function () {
     return Session.get('tableCellCount');
+  },
+  cellInfo: function () {
+    var page = Session.get('tablePage') || 1;
+    var num = Session.get('tableNum') || 20;
+    return {
+      cellStart: (page - 1) * num + 1,
+      cellEnd: page * num
+    };
   }
 });
 
