@@ -72,15 +72,24 @@ var orderlistsOptions = {
   //   }
   // }
   ],
-  pageLength: 10,
-  lengthMenu: [10, 15, 20,25, 50]
+  bPaginate: false,
+  // pageLength: 10,
+  // lengthMenu: [10, 15, 20,25, 50]
 }
 
-
 var reactiveFun = function () {
-  var orders = Orders.find({typeNameFlag: 'assurance'}, {payedTime: -1});
-  return orders.fetch();
+  return Orders.find({typeNameFlag: 'assurance'}, {payedTime: -1}).fetch();
 };
+
+
+Template.assurancelist_partial.onCreated(function () {
+  Session.set('tableFilter', {typeNameFlag: 'assurance'});
+  this.autorun(function () {
+      var dataLimit = Session.get('tableOpt') || {page: 1, num: 20};
+      var dataFilter = Session.get('tableFilter') || {};
+      return Meteor.subscribe('getAllOrders', dataLimit, dataFilter );
+  });
+});
 
 Template.assurancelist_partial.helpers({
   orderlistData: function () {

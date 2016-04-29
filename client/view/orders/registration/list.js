@@ -115,8 +115,9 @@ var orderlistsOptions = {
   }
 }
 ],
-  pageLength: 10,
-  lengthMenu: [10, 15, 20,25, 50]
+bPaginate: false,
+  // pageLength: 10,
+  // lengthMenu: [10, 15, 20,25, 50]
 }
 
 var reactiveFun = function () {
@@ -127,6 +128,16 @@ var reactiveFun = function () {
     return orders.fetch();
   }
 };
+
+
+Template.registrationListsView.onCreated(function () {
+  Session.set('tableFilter', {typeNameFlag: 'registration'});
+  this.autorun(function () {
+      var dataLimit = Session.get('tableOpt') || {page: 1, num: 20};
+      var dataFilter = Session.get('tableFilter') || {};
+      return Meteor.subscribe('getAllOrders', dataLimit, dataFilter );
+  });
+});
 
 Template.registrationListsView.helpers({
   orderlistData: function () {

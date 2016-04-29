@@ -3,11 +3,11 @@ var orderlistsOptions = {
   columns: [
   {
     title: '订单编号',
-    data: 'order_id', 
+    data: 'order_id',
     className: 'orderId'
   },
   {
-    title: '订单状态', 
+    title: '订单状态',
     data: 'order_statusL'
   },
   {
@@ -25,24 +25,24 @@ var orderlistsOptions = {
   {
     title: '更新时间',
     data: 'order_update_time'
-  }, 
+  },
   {
-    'title': '详细信息', 
-    className: 'handle', 
+    'title': '详细信息',
+    className: 'handle',
     render: function(cellData, renderType, currentRow) {
       var html = "<a href='/wxorder/" + currentRow.order_id  + "'><button type='button' class='btn btn-primary'>详细信息</button></a>"
       return html;
     }
-  }   
+  }
   ],
-  pageLength: 10,
-  lengthMenu: [10, 15, 20,25, 50]  
+  pageLength: 20,
+  lengthMenu: [10, 15, 20,25, 50]
 }
 
 
 
-var reactiveFun = function () { 
-  return Orders.find({host: 'KYLWECHAT'}).fetch(); 
+var reactiveFun = function () {
+  return Orders.find({host: 'KYLWECHAT'}).fetch();
 };
 
 
@@ -51,7 +51,7 @@ Template.wechatorderlistsTpl.helpers({
   orderlistData: function () {
     return reactiveFun;
   },
-  optionsObject: orderlistsOptions 
+  optionsObject: orderlistsOptions
 });
 
 

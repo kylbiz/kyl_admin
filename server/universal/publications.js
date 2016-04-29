@@ -1,4 +1,11 @@
-Meteor.publish('getAllOrders', function() {
+Meteor.publish('getAllOrders', function(dataLimit, dataFilter) {
+  dataLimit = dataLimit || {};
+  page = dataLimit.page || 1;
+  num = dataLimit.num || 10;
+
+  dataFilter = dataFilter || {};
+  dataFilter.payed = true;
+
   var user = Meteor.users.findOne({_id: this.userId});
   if (!Roles.userIsInRole(user, ['manageusers'])) {
     var userNameLists = /15618871296|18521595051|15026444506|13701673465|13524861250|13916175286|15921239366|13585955409|150000852940/;
@@ -15,28 +22,15 @@ Meteor.publish('getAllOrders', function() {
     for(var i = 0; i < users.length; i++) {
       userIdLists.push(users[i]._id);
     }
-
-    return Orders.find({
-      host: /KYLPC|KYLWX|KYLWAP/,
-      payed: true,
-      'userId': {
-        $nin: userIdLists
-      }
-    }, {
-      sort: {payedTime: -1},
-      limit: 150,
-    });
-  } else {
-    return Orders.find({host: /KYLPC|KYLWX|KYLWAP/, payed: true}, {
-      sort: {payedTime: -1},
-      limit: 150,
-    });
+    dataFilter.userId = {$nin: userIdLists};
   }
-})
 
-// Meteor.publish("getOrdersCount", function() {
-//   return Orders.find({}, {fields: {typeNameFlag: 1, host: 1}})
-// })
+  return Orders.find(dataFilter, {
+    sort: {payedTime: -1},
+    limit: num || 20,
+    skip: (page - 1) * num
+  });
+})
 
 
 Meteor.publish('getOrderTypeLists', function(typeNameFlag) {

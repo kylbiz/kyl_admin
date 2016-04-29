@@ -77,13 +77,25 @@ var orderlistsOptions = {
     }
   }
   ],
-  pageLength: 10,
-  lengthMenu: [10, 15, 20,25, 50]
+  bPaginate: false,
+  // pageLength: 10,
+  // lengthMenu: [10, 15, 20,25, 50]
 }
 
 var reactiveFun = function () {
   return Orders.find({typeNameFlag: 'bookkeeping'}, {payedTime: -1}).fetch();
 };
+
+
+
+Template.bookkeepingListPartital.onCreated(function () {
+  Session.set('tableFilter', {typeNameFlag: 'bookkeeping'});
+  this.autorun(function () {
+      var dataLimit = Session.get('tableOpt') || {page: 1, num: 20};
+      var dataFilter = Session.get('tableFilter') || {};
+      return Meteor.subscribe('getAllOrders', dataLimit, dataFilter );
+  });
+});
 
 Template.bookkeepingListPartital.helpers({
   orderlistData: function () {

@@ -86,72 +86,34 @@ var orderlistsOptions = {
     }
   }
   ],
-   pageLength: 10,
-   lengthMenu: [ 10, 15, 20, 25, 50 ]
+  bPaginate: false,
+   // pageLength: 20,
+   // lengthMenu: [ 10, 15, 20, 25, 50 ]
 }
+
+
+Template.list_partial.onCreated(function () {
+  Session.set('tableFilter', {});
+
+  this.autorun(function () {
+      var dataLimit = Session.get('tableOpt') || {page: 1, num: 20};
+      var dataFilter = Session.get('tableFilter') || {};
+      return Meteor.subscribe('getAllOrders', dataLimit, dataFilter );
+  });
+});
 
 Template.list_partial.helpers({
   orderlistData: function () {
     return function () {
-      // return Orders.find({payed: true}, {sort: {orderId: -1}}).fetch();
       return Orders.find({}, {payedTime: -1}).fetch();
     };
   },
-  optionsObject: orderlistsOptions,
-  ordersLists: function() {
-    return Orders.find({});
-  },
-  Orders() {
-    var params =  Router.current().params.query;
-    var page = parseInt(params.page) || 1;
-    var num = parseInt(params.num) || 10;
-    return Orders.find({},{
-      sort:{createdAt:-1},
-      skip:(page-1)*num,
-      limit:10,
-    });
-  },
-  'click .previous':function() {
-    var params =  Router.current().params.query;
-    var page = parseInt(params.page) || 1;
-    var num = parseInt(params.num) || 10;
-    if (page<=1) {
-      // statement
-      alert('已经是第一页!');
-    }else{
-      return Orders.find({},{
-        sort:{createdAt:-1},
-        skip:(page-2)*num,
-        limit:10,
-      });
-    }
-  },
-  'click .next':function() {
-    var params =  Router.current().params.query;
-    var page = parseInt(params.page) || 1;
-    var num = parseInt(params.num) || 10;
-    if (page*num > Orders.find().count()) {
-      alert('已经是最后一页！')
-    }
-    else {
-      return Orders.find({},{
-        sort:{createdAt:-1},
-        skip:(page)*num,
-        limit:10,
-      });
-    }
-  }
+  optionsObject: orderlistsOptions
+
 });
 
-Template.list.helpers({
-  "listNum": function() {
-    return Orders.find({}).count();
-  }
-})
-
 Template.list.onRendered(function () {
-  $("table.table").DataTable().order([10, 'asc']).draw();
-
+  // $("table.table").DataTable().order([10, 'asc']).draw();
   $.fn.dataTable.ext.search.push(
     function (settings, data, dataIndex) {
       var min = $('#start_date').val();
@@ -171,5 +133,43 @@ Template.list.onRendered(function () {
     return false;
   }
   );
-
 })
+
+
+// 表格分页
+Template.navPaging.onRendered(function () {
+    Session.set('tablePage', 1);
+    Session.set('tableNum', 20);
+    this.autorun(function () {
+      var tableFilter = Session.get('tableFilter') || {};
+      Meteor.call('getOrdersCount', tableFilter, function (error, count) {
+        Session.set('tableCellCount', count || 0);
+      });
+
+      var page = Session.get('tablePage') || 1;
+      var num = Session.get('tableNum') || 20;
+      var tableCellCount = Session.get('tableCellCount');
+      Session.set('tablePageCount', Math.ceil(tableCellCount / num) );
+      Session.set('tableOpt', {
+        page: page,
+        num: num,
+      });
+    });
+});
+
+Template.navPaging.helpers({
+  tableCellCount: function () {
+    return Session.get('tableCellCount');
+  }
+});
+
+Template.navPaging.events({
+  'click .previous': function () {
+    var page = Math.max( (Session.get('tablePage') - 1), 1 );
+    Session.set('tablePage', page);
+  },
+  'click .next': function () {
+    var page = Math.min( (Session.get('tablePage') + 1), Session.get('tablePageCount') );
+    Session.set('tablePage', page);
+  }
+});

@@ -1,25 +1,25 @@
-<template name="registrationLists">    
+<template name="registrationLists">
   {{#content title="公司注册订单" mainTitle="订单管理" productType="registration" listNum=listNum}}
   <div class="row">
-    <div class="col-md-12">       
+    <div class="col-md-12">
       {{#source_boxTemplate title="公司注册订单"}}
       {{> registrationListsView }}
       {{/source_boxTemplate}}
     </div>
-  </div>    
+  </div>
   {{/content}}
-  
+
   {{> processTpl}}
 </template>
 
 <template name="registrationListsView">
-  {{> ReactiveDatatable tableData=orderlistData options=optionsObject }}
   {{> navPaging}}
+  {{> ReactiveDatatable tableData=orderlistData options=optionsObject }}
 
   <div class="">
     {{> datetime }}
   </div>
-  
+
   <div class="form-horizontal">
     <div class="form-group">
      <div class="col-sm-12">
@@ -32,11 +32,11 @@
           <option value="核名">核名</option>
           <option value="股东签字确认">股东签字确认</option>
           <option value="工商注册登记">工商注册登记</option>
-          <option value="领取企业代码证">领取企业代码证</option>       
+          <option value="领取企业代码证">领取企业代码证</option>
         </select>
-      </div>       
+      </div>
     </div>
   </div>
 </div>
 
-</template> 
+</template>

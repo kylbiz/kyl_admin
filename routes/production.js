@@ -1,6 +1,6 @@
 //---------------------------------------------
 function isInteger(value) {
-  return typeof value === "number" && isFinite(value) && Math.floor(value) === value;  
+  return typeof value === "number" && isFinite(value) && Math.floor(value) === value;
 }
 
 
@@ -43,11 +43,7 @@ Router.route('list', {
     } else {
       this.next();
     }
-  },  
-  waitOn: function() {
-    var userId = Meteor.userId() || "";
-    return Meteor.subscribe('getAllOrders');
-  }
+  },
 });
 
 Router.route('/list/table');
@@ -56,62 +52,62 @@ Router.route('/list/table');
 
 Router.route('/list/registration', {
   name: 'registrationLists',
-  subscriptions: function() {
-    return Meteor.subscribe('getOrderTypeLists', 'registration');
-  },
-  waitOn: function() {
-    return Meteor.subscribe('getOrderTypeLists', 'registration');
-  }
+  // subscriptions: function() {
+  //   return Meteor.subscribe('getOrderTypeLists', 'registration');
+  // },
+  // waitOn: function() {
+  //   return Meteor.subscribe('getOrderTypeLists', 'registration');
+  // }
 })
 
 Router.route('/list/finance', {
   name: 'financeList',
-  subscriptions: function() {
-    return Meteor.subscribe('getOrderTypeLists', 'finance');
-  },
-  waitOn: function() {
-    return Meteor.subscribe('getOrderTypeLists', 'finance');
-  }
+  // subscriptions: function() {
+  //   return Meteor.subscribe('getOrderTypeLists', 'finance');
+  // },
+  // waitOn: function() {
+  //   return Meteor.subscribe('getOrderTypeLists', 'finance');
+  // }
 });
 
 Router.route('/list/bank', {
   name: 'bankList',
-  subscriptions: function() {
-   return  Meteor.subscribe('getOrderTypeLists', 'bank');
-  },  
-  waitOn: function() {
-   return  Meteor.subscribe('getOrderTypeLists', 'bank');
-  }
+  // subscriptions: function() {
+  //  return  Meteor.subscribe('getOrderTypeLists', 'bank');
+  // },
+  // waitOn: function() {
+  //  return  Meteor.subscribe('getOrderTypeLists', 'bank');
+  // }
 });
 
 Router.route('/list/assurance', {
   name: 'assuranceList',
-  subscriptions: function() {
-   return Meteor.subscribe('getOrderTypeLists', 'assurance');
-  },  
-  waitOn: function() {
-   return Meteor.subscribe('getOrderTypeLists', 'assurance');
-  }
+  // subscriptions: function() {
+  //  return Meteor.subscribe('getOrderTypeLists', 'assurance');
+  // },
+  // waitOn: function() {
+  //  return Meteor.subscribe('getOrderTypeLists', 'assurance');
+  // }
 });
 
 Router.route('/list/bookkeeping',{
   name: 'bookkeepingList',
-  subscriptions: function() {
-    return Meteor.subscribe('getOrderTypeLists', 'bookkeeping');
-  },  
-  waitOn: function() {
-   return Meteor.subscribe('getOrderTypeLists', 'bookkeeping');
-  }
+  // subscriptions: function() {
+  //   return Meteor.subscribe('getOrderTypeLists', 'bookkeeping');
+  // },
+  // waitOn: function() {
+  //  return Meteor.subscribe('getOrderTypeLists', 'bookkeeping');
+  // }
 });
 
 Router.route('/list/special',{
   name: 'specialList',
-  subscriptions: function() {
-    return Meteor.subscribe('getOrderTypeLists', 'special');
-  },  
-  waitOn: function() {
-   return Meteor.subscribe('getOrderTypeLists', 'special');
-  }
+  // subscriptions: function() {
+  //   return Meteor.subscribe('getOrderTypeLists', 'special');
+  // },
+  // waitOn: function() {
+  //  return Meteor.subscribe('getOrderTypeLists', 'special');
+  // }
 });
 
 
@@ -145,9 +141,9 @@ Router.route('/registration/:orderId', {
       var length = holders.length;
       if(moneyAmount > 0) {
         for(var i = 0; i < length; i++) {
-          var percentage = handleProportion(parseInt(holders[i].money), moneyAmount); 
+          var percentage = handleProportion(parseInt(holders[i].money), moneyAmount);
           holders[i].percentage = percentage;
-        }        
+        }
       }
       order.holders = holders;
     }
@@ -272,13 +268,13 @@ Router.route('/bookkeeping/:orderId', {
           holder.money = parseInt(holder.money);
         }
         moneyAmount += holder.money;
-      }); 
+      });
       var length = holders.length;
       if(moneyAmount > 0) {
         for(var i = 0; i < length; i++) {
-          var percentage = handleProportion(parseInt(holders[i].money), moneyAmount); 
+          var percentage = handleProportion(parseInt(holders[i].money), moneyAmount);
           holders[i].percentage = percentage;
-        }        
+        }
       }
       order.holders = holders;
     }
@@ -316,7 +312,7 @@ Router.route('/userList',{
   name: 'userList',
   subscriptions: function () {
     return Meteor.subscribe("customers");
-  },  
+  },
   waitOn: function () {
     return Meteor.subscribe("customers");
   }
@@ -331,7 +327,7 @@ Router.route('/userDetail/:_id', {
   data: function() {
     Session.set("userId", this.params._id);
     return Meteor.users.findOne({_id: this.params._id});
-  } 
+  }
 });
 
 Router.route('/adminSet/:_id', {
@@ -359,7 +355,7 @@ Router.onBeforeAction(function () {
         Meteor.logout();
       }
     })
-    this.next(); 
+    this.next();
   }
 });
 

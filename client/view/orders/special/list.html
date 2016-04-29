@@ -1,21 +1,21 @@
-<template name="specialList">    
+<template name="specialList">
   {{#content title="特别订单" mainTitle="订单管理" productType="registration"}}
   <div class="row">
-    <div class="col-md-12">       
+    <div class="col-md-12">
       {{#boxTemplate title="特别订单"}}
       {{> specialListsView }}
       {{/boxTemplate}}
     </div>
-  </div>    
+  </div>
   {{/content}}
-  
+
   {{> processTpl}}
 </template>
 
 
 <template name="specialListsView">
-    {{> ReactiveDatatable tableData=speciallistData options=optionsObject }}
     {{> navPaging }}
+    {{> ReactiveDatatable tableData=speciallistData options=optionsObject }}
 </template>
 
 

@@ -456,3 +456,14 @@ Meteor.methods({
 
 
 
+Meteor.methods({
+  'getOrdersCount': function (opt) {
+    opt = opt || {};
+    opt.payed = true;
+    return Orders.find(opt).count();
+  }
+});
+
+
+
+
