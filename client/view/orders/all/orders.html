@@ -13,13 +13,17 @@
 </template>
 
 <template name="list_partial">
+    <input type="hidden" id="allPageSize" value="340">   <!-- 页面总记录数 -->
+    <input type="hidden" id="pageNum" value="1">         <!-- 当前页码 -->
+    <input type="hidden" id="worksTypeId" value="1">      <!-- 分组id -->
+    <div id="pageNumberUpAndDown">
+       <!-- 此处为分页开始 -->
+    </div>
     {{> ReactiveDatatable tableData=orderlistData options=optionsObject }}
     {{> navPaging }}
-
     <div>
       {{> datetime }}
     </div>
-
 </template>
 
 
@@ -31,6 +35,7 @@
           <span aria-hidden="true">&laquo;</span>
         </a>
       </li>
+
        {{> tablePaging}}
       <li>
         <a href="#" aria-label="Next" class="next">
