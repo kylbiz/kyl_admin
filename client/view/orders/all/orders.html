@@ -23,7 +23,6 @@
 
 <template name="navPaging">
   <nav>
-    <span>第{{cellInfo.cellStart}}-{{cellInfo.cellEnd}}条, 共{{tableCellCount}}条</span>
     <ul class="pagination pull-right">
       <li>
         <a href="" aria-label="Previous" class="previous">
@@ -36,6 +35,7 @@
         </a>
       </li>
     </ul>
+    <span class="tableCellCount pull-right">第{{cellInfo.cellStart}}-{{cellInfo.cellEnd}}条, 共{{tableCellCount}}条</span>
   </nav>
 </template>
 
