@@ -109,11 +109,10 @@ Template.list_partial.helpers({
     };
   },
   optionsObject: orderlistsOptions
-
 });
 
 Template.list.onRendered(function () {
-  // $("table.table").DataTable().order([10, 'asc']).draw();
+  $("table.table").DataTable().order([10, 'asc']).draw();
   $.fn.dataTable.ext.search.push(
     function (settings, data, dataIndex) {
       var min = $('#start_date').val();
