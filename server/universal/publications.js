@@ -25,11 +25,33 @@ Meteor.publish('getAllOrders', function(dataLimit, dataFilter) {
     dataFilter.userId = {$nin: userIdLists};
   }
 
-  return Orders.find(dataFilter, {
+  var orderInfo = Orders.find(dataFilter, {
     sort: {payedTime: -1},
     limit: num || 20,
-    skip: (page - 1) * num
+    skip: (page - 1) * num,
+    fields: {openid: 1}
   });
+
+  var openidList = [];
+  orderInfo.forEach(function (order) {
+    if (order.openid) {
+      openidList.push(order.openid);
+    }
+  });
+
+  return [
+    Orders.find(dataFilter, {
+      sort: {payedTime: -1},
+      limit: num || 20,
+      skip: (page - 1) * num
+    }),
+    PayLogs.find(
+      { openid: {$in: openidList || []} },
+      {
+        fields: {openid: 1, payInfos: 1, wxpayInfos: 1, paySuccessInfo: 1}
+      }
+    )
+  ];
 })
 
 

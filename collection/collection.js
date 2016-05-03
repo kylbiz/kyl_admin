@@ -21,6 +21,8 @@ WeChatInfo = new Meteor.Collection('wechatinfo');
 
 WeChatShopGoods = new Meteor.Collection('WeChatShopGoods');
 
+PayLogs = new Meteor.Collection('PayLogs');
+
 
 Date.prototype.Format = function (fmt) { //author: meizz
   var o = {
@@ -64,7 +66,34 @@ Orders.helpers({
       'KYLWX': '微信支付',
       'KYLWAP': '移动端支付宝支付',
     }[host] || "未知渠道";
-    return payHost + '-' + this.openid + "<br/>" + "(开业啦订单编号:" + this.orderId + ")";
+
+    var openid = this.openid;
+    var payLog = PayLogs.findOne({openid: openid}) || {};
+    channelPayOrder = "未知";
+    if (payLog) {
+      channelPayOrder = {
+        'KYLPC': function () {
+          var payInfos = payLog.payInfos || {};
+          if (!payInfos.messageDetail) {
+            // console.log('payLog', host, openid, payInfos);
+            return "未知";
+          }
+          return payInfos.messageDetail.trade_no || '未知';
+        },
+        'KYLWX': function () {
+          var wxpayInfos = payLog.wxpayInfos || payLog.paySuccessInfo || {};
+          return wxpayInfos.transaction_id || wxpayInfos.transaction_no || '未知';
+        },
+        'KYLWAP': function () {
+          var paySuccessInfo = payLog.paySuccessInfo || {};
+          return paySuccessInfo.transaction_no || '未知';
+        }
+      }[host]() || "未知";
+    }
+
+    return payHost + '-' + this.openid
+          + "<br/>" + " 开业啦订单编号: " + this.orderId
+          + "<br/>" + " 支付渠道方单号: " + channelPayOrder;
   },
   createTimeL: function () {
     if (this.createTime) {
