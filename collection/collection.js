@@ -95,6 +95,9 @@ Orders.helpers({
           + "<br/>" + " 开业啦订单编号: " + this.orderId
           + "<br/>" + " 支付渠道方单号: " + channelPayOrder;
   },
+  payChannel: function () {
+    return {'KYLPC': 'PC端支付宝', 'KYLWAP': '移动端支付宝', 'KYLWX': '微信'}[this.host] || "未知";
+  },
   createTimeL: function () {
     if (this.createTime) {
       return moment(this.createTime).format('YYYY-MM-DD HH:mm');

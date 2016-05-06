@@ -38,6 +38,10 @@ var orderlistsOptions = {
     data: 'orderHost'
   },
   {
+    title: '支付渠道',
+    data: 'payChannel'
+  },
+  {
     title: '下单时间',
     className: 'width-80',
     data: 'createTimeL'
