@@ -121,7 +121,7 @@ bPaginate: false,
 }
 
 var reactiveFun = function () {
-  var orders = Orders.find({typeNameFlag: 'registration'});
+  var orders = Orders.find({typeNameFlag: 'registration'}, {sort: {payedTime: -1} });
   if(orders.count() === 0) {
     return [];
   } else {
@@ -147,6 +147,7 @@ Template.registrationListsView.helpers({
 });
 
 Template.registrationListsView.onRendered(function(){
+  $("table.table").DataTable().order([9, 'desc']).draw();
   $("#classify").change(function(){
     var value=$(this).val();
     $("table.table").DataTable().columns(9).search(value).draw();

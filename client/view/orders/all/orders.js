@@ -98,7 +98,6 @@ var orderlistsOptions = {
 
 Template.list_partial.onCreated(function () {
   Session.set('tableFilter', {});
-
   this.autorun(function () {
       var dataLimit = Session.get('tableOpt') || {page: 1, num: 20};
       var dataFilter = Session.get('tableFilter') || {};
@@ -109,14 +108,14 @@ Template.list_partial.onCreated(function () {
 Template.list_partial.helpers({
   orderlistData: function () {
     return function () {
-      return Orders.find({}, {payedTime: -1}).fetch();
+      return Orders.find({}, {sort: {payedTime: -1} }).fetch();
     };
   },
   optionsObject: orderlistsOptions
 });
 
-Template.list.onRendered(function () {
-  $("table.table").DataTable().order([10, 'asc']).draw();
+Template.list_partial.onRendered(function () {
+  $("table.table").DataTable().order([10, 'desc']).draw();
   $.fn.dataTable.ext.search.push(
     function (settings, data, dataIndex) {
       var min = $('#start_date').val();
@@ -128,13 +127,13 @@ Template.list.onRendered(function () {
       time = Date.parse(time);
 
       if ((isNaN(min) && isNaN(max)) ||
-        (isNaN(min) && time < max) ||
-        (min < time && isNaN(max)) ||
-        (min < time && time < max)) {
-        return true;
+          (isNaN(min) && time < max) ||
+          (min < time && isNaN(max)) ||
+          (min < time && time < max)) {
+          return true;
+      }
+      return false;
     }
-    return false;
-  }
   );
 })
 
