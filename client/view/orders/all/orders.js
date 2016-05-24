@@ -199,7 +199,7 @@ Template.navPaging.events({
         {"addressInfo.receiver": filterStr},
         {"addressInfo.phone": filterStr},
         {"openid": filterStr},
-        {"relationId": filterStr}
+        {"orderId": filterStr}
       ]};
 
       Session.set('tableFilter', _.extend(dataFilter, extFilter));
