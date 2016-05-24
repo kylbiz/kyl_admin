@@ -93,7 +93,8 @@ Orders.helpers({
 
     return payHost + '-' + this.openid
           + "<br/>" + " 开业啦订单编号: " + this.orderId
-          + "<br/>" + " 支付渠道方单号: " + channelPayOrder;
+          + "<br/>" + " 支付渠道方单号: " + channelPayOrder
+          + "<br/>" + "<i><b> 备注信息: </b></i>" + (this.remark || '无');
   },
   payChannel: function () {
     return {'KYLPC': 'PC端支付宝', 'KYLWAP': '移动端支付宝', 'KYLWX': '微信'}[this.host] || "未知";

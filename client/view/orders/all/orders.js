@@ -181,5 +181,22 @@ Template.navPaging.events({
   'click .next': function () {
     var page = Math.min( (Session.get('tablePage') + 1), Session.get('tablePageCount') );
     Session.set('tablePage', page);
+  },
+  'change #searchData': function (event) {
+    var filterStr = $(event.currentTarget).val() || "";
+
+    console.log("searchData", filterStr);
+
+    if (filterStr) {
+      var extFilter = {$or : [
+        {"addressInfo.receiver": filterStr},
+        {"addressInfo.phone": filterStr},
+        {"openid": filterStr},
+        {"relationId": filterStr}
+      ]};
+
+      var dataFilter = Session.get('tableFilter') || {};
+      Session.set('tableFilter', _.extend(dataFilter, extFilter));
+    }
   }
 });
