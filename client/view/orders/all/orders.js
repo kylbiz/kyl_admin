@@ -91,6 +91,9 @@ var orderlistsOptions = {
   }
   ],
   bPaginate: false,
+  language: {
+    searchPlaceholder: "本页搜索"
+  }
    // pageLength: 20,
    // lengthMenu: [ 10, 15, 20, 25, 50 ]
 }
