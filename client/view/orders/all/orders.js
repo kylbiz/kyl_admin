@@ -190,6 +190,10 @@ Template.navPaging.events({
 
     console.log("searchData", filterStr);
 
+    var dataFilter = Session.get('tableFilter') || {};
+    Session.set('tablePage', 1);
+    Session.set('tableNum', 20);
+    Session.set("tableOpt", {page: 1, num: 20});
     if (filterStr) {
       var extFilter = {$or : [
         {"addressInfo.receiver": filterStr},
@@ -198,8 +202,11 @@ Template.navPaging.events({
         {"relationId": filterStr}
       ]};
 
-      var dataFilter = Session.get('tableFilter') || {};
       Session.set('tableFilter', _.extend(dataFilter, extFilter));
+    } else {
+      delete dataFilter['$or'];
+      Session.set('tableFilter',dataFilter);
     }
+
   }
 });
